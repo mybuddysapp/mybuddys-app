@@ -1,0 +1,124 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+import 'package:mybuddys/algo/model/activity/activity.dart';
+import 'package:mybuddys/extensions/ref_ext.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+
+
+// for references
+// https://riverpod.dev/docs/concepts/about_code_generation
+
+// flutter pub run build_runner build --delete-conflicting-outputs
+
+// Necessary for code-generation to work
+part 'provider.g.dart';
+
+
+/// This will create a provider named `activityProvider`
+/// which will cache the result of this function.
+@riverpod
+Future<Activity> activity(ActivityRef ref) async {
+  // // Using package:http, we fetch a random activity from the Bored API.
+  // final response = await http.get(Uri.https('boredapi.com', '/api/activity'));
+  // // Using dart:convert, we then decode the JSON payload into a Map data structure.
+
+  // // We create an HTTP client using package:http
+  // final client = http.Client();
+  //
+  // // On dispose, we close the client.
+  // // This will cancel any pending request that the client might have.
+  // ref.onDispose(client.close);
+
+  final client = http.Client();
+
+
+  // We now use the client to make the request instead of the "get" function
+  final response = await client.get(
+    Uri.https('www.boredapi.com', '/api/activity'),
+  );
+
+
+  final json = jsonDecode(response.body) as Map<String, dynamic>;
+  // Finally, we convert the Map into an Activity instance.
+  return Activity.fromJson(json);
+}
+
+@riverpod
+Future<Activity> activityWithType(
+    ActivityRef ref,
+    // We can add arguments to the provider.
+    // The type of the parameter can be whatever you wish.
+    String activityType,
+    ) async {
+  // We can use the "activityType" argument to build the URL.
+  // This will point to "https://boredapi.com/api/activity?type=<activityType>"
+  final response = await http.get(
+    Uri(
+      scheme: 'https',
+      host: 'boredapi.com',
+      path: '/api/activity',
+      // No need to manually encode the query parameters, the "Uri" class does it for us.
+      queryParameters: {'type': activityType},
+    ),
+  );
+  final json = jsonDecode(response.body) as Map<String, dynamic>;
+  return Activity.fromJson(json);
+}
+
+//
+// @riverpod
+// Future<List<Todo>> todoList(TodoListRef ref) async {
+//   // Simulate a network request. This would normally come from a real API
+//   return [
+//     Todo(description: 'Learn Flutter', completed: true),
+//     Todo(description: 'Learn Riverpod', completed: false),
+//   ];
+// }
+//
+// @riverpod
+// class TodoList extends _$TodoList {
+//   @override
+//   Future<List<Todo>> build() async {
+//     // The logic we previously had in our FutureProvider is now in the build method.
+//     return [
+//       Todo(description: 'Learn Flutter', completed: true),
+//       Todo(description: 'Learn Riverpod'),
+//     ];
+//   }
+//
+//   Future<void> addTodo(Todo todo) async {
+//     final response = await http.post(
+//       Uri.https('your_api.com', '/todos'),
+//       // We serialize our Todo object and POST it to the server.
+//       headers: {'Content-Type': 'application/json'},
+//       body: jsonEncode(todo.toJson()),
+//     );
+//
+//     List<Todo> newTodos = (jsonDecode(response.body) as List)
+//         .cast<Map<String, Object?>>()
+//         .map(Todo.fromJson)
+//         .toList();
+//
+//     // We update the local cache to match the new state.
+//     // This will notify all listeners.
+//     state = AsyncData(newTodos);
+//   }
+//
+//   Future<void> addTodo2(Todo todo) async {
+//     // We don't care about the API response
+//     await http.post(
+//       Uri.https('your_api.com', '/todos'),
+//       headers: {'Content-Type': 'application/json'},
+//       body: jsonEncode(todo.toJson()),
+//     );
+//
+//     // Once the post request is done, we can mark the local cache as dirty.
+//     // This will cause "build" on our notifier to asynchronously be called again,
+//     // and will notify listeners when doing so.
+//     ref.invalidateSelf();
+//
+//     // (Optional) We can then wait for the new state to be computed.
+//     // This ensures "addTodo" does not complete until the new state is available.
+//     await future;
+//   }
+// }
