@@ -11,7 +11,7 @@ void main() async {
   // initialize the user repository
   await SupabaseAuthProvider.initialize(
     // SUPABASE_URL,
-    'http://192.168.1.134:8000',
+    'http://192.168.1.202:8000',
     SUPABASE_ANON_KEY,
   );
   runApp(
