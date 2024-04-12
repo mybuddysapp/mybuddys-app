@@ -1,0 +1,6 @@
+
+*.stamp
+*.xml
+*.dart
+/.dart_tool
+/.idea
