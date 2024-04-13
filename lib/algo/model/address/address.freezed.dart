@@ -21,6 +21,7 @@ Address _$AddressFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Address {
   String get id => throw _privateConstructorUsedError;
+  String get number => throw _privateConstructorUsedError;
   String get street => throw _privateConstructorUsedError;
   String get city => throw _privateConstructorUsedError;
   String? get state => throw _privateConstructorUsedError;
@@ -39,6 +40,7 @@ abstract class $AddressCopyWith<$Res> {
   @useResult
   $Res call(
       {String id,
+      String number,
       String street,
       String city,
       String? state,
@@ -60,6 +62,7 @@ class _$AddressCopyWithImpl<$Res, $Val extends Address>
   @override
   $Res call({
     Object? id = null,
+    Object? number = null,
     Object? street = null,
     Object? city = null,
     Object? state = freezed,
@@ -70,6 +73,10 @@ class _$AddressCopyWithImpl<$Res, $Val extends Address>
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      number: null == number
+          ? _value.number
+          : number // ignore: cast_nullable_to_non_nullable
               as String,
       street: null == street
           ? _value.street
@@ -104,6 +111,7 @@ abstract class _$$AddressImplCopyWith<$Res> implements $AddressCopyWith<$Res> {
   @useResult
   $Res call(
       {String id,
+      String number,
       String street,
       String city,
       String? state,
@@ -123,6 +131,7 @@ class __$$AddressImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
+    Object? number = null,
     Object? street = null,
     Object? city = null,
     Object? state = freezed,
@@ -133,6 +142,10 @@ class __$$AddressImplCopyWithImpl<$Res>
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      number: null == number
+          ? _value.number
+          : number // ignore: cast_nullable_to_non_nullable
               as String,
       street: null == street
           ? _value.street
@@ -163,6 +176,7 @@ class __$$AddressImplCopyWithImpl<$Res>
 class _$AddressImpl with DiagnosticableTreeMixin implements _Address {
   _$AddressImpl(
       {required this.id,
+      required this.number,
       required this.street,
       required this.city,
       this.state,
@@ -174,6 +188,8 @@ class _$AddressImpl with DiagnosticableTreeMixin implements _Address {
 
   @override
   final String id;
+  @override
+  final String number;
   @override
   final String street;
   @override
@@ -187,7 +203,7 @@ class _$AddressImpl with DiagnosticableTreeMixin implements _Address {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Address(id: $id, street: $street, city: $city, state: $state, zip: $zip, country: $country)';
+    return 'Address(id: $id, number: $number, street: $street, city: $city, state: $state, zip: $zip, country: $country)';
   }
 
   @override
@@ -196,6 +212,7 @@ class _$AddressImpl with DiagnosticableTreeMixin implements _Address {
     properties
       ..add(DiagnosticsProperty('type', 'Address'))
       ..add(DiagnosticsProperty('id', id))
+      ..add(DiagnosticsProperty('number', number))
       ..add(DiagnosticsProperty('street', street))
       ..add(DiagnosticsProperty('city', city))
       ..add(DiagnosticsProperty('state', state))
@@ -209,6 +226,7 @@ class _$AddressImpl with DiagnosticableTreeMixin implements _Address {
         (other.runtimeType == runtimeType &&
             other is _$AddressImpl &&
             (identical(other.id, id) || other.id == id) &&
+            (identical(other.number, number) || other.number == number) &&
             (identical(other.street, street) || other.street == street) &&
             (identical(other.city, city) || other.city == city) &&
             (identical(other.state, state) || other.state == state) &&
@@ -219,7 +237,7 @@ class _$AddressImpl with DiagnosticableTreeMixin implements _Address {
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, id, street, city, state, zip, country);
+      Object.hash(runtimeType, id, number, street, city, state, zip, country);
 
   @JsonKey(ignore: true)
   @override
@@ -238,6 +256,7 @@ class _$AddressImpl with DiagnosticableTreeMixin implements _Address {
 abstract class _Address implements Address {
   factory _Address(
       {required final String id,
+      required final String number,
       required final String street,
       required final String city,
       final String? state,
@@ -248,6 +267,8 @@ abstract class _Address implements Address {
 
   @override
   String get id;
+  @override
+  String get number;
   @override
   String get street;
   @override

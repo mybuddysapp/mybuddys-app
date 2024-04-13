@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:mybuddys/algo/api/api.dart';
 import 'package:mybuddys/algo/model/event/event.dart';
 import 'package:mybuddys/algo/provider/player/player_provider.dart';
@@ -14,6 +15,8 @@ Future<List<Event>> eventList(EventListRef ref) async {
 
   final playerList = await ref.read(playerListProvider.future);
   final response = await getResponseListData(client, "events");
+
+  debugPrint("response: " + response.toString());
 
   final List<Event> events =
       (response).map((e) => Event.fromJson(e as Map<String, dynamic>)).toList();

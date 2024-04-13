@@ -24,23 +24,39 @@ class ProfilePage extends HookConsumerWidget {
     //   );
     // }
 
-    return player.when(
-      loading: () => const Center(
-        child: CircularProgressIndicator(),
+    return Scaffold(
+      //app bar with signout button
+      appBar: AppBar(
+        title: const Text('Profile'),
+        actions: [
+          IconButton(
+            onPressed: () {
+              ref.watch(authProvider.notifier).logout();
+              return context.go(APP.login.toName);
+            },
+            icon: const Icon(Icons.logout),
+          ),
+        ],
       ),
-      error: (error, stackTrace) => Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text('Error: $error'),
-            ElevatedButton(
-              onPressed: () => ref.refresh(playerProvider(session.user.id)),
-              child: const Text('Try Again'),
-            ),
-          ],
+      body: player.when(
+        loading: () => const Center(
+          child: CircularProgressIndicator(),
         ),
+        error: (error, stackTrace) => Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('Error: $error'),
+              ElevatedButton(
+                onPressed: () => ref.refresh(playerProvider(session.user.id)),
+                child: const Text('Try Again'),
+              ),
+            ],
+          ),
+        ),
+        data: (playerData) =>
+            _ProfileView(session: session, player: playerData),
       ),
-      data: (playerData) => _ProfileView(session: session, player: playerData),
     );
   }
 }
@@ -60,8 +76,14 @@ class _ProfileView extends ConsumerWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image(image: NetworkImage(player.avatar!)),
-          Text('Profile'),
+          // display the user avatar or a default image
+          CircleAvatar(
+            radius: 50,
+            backgroundImage: NetworkImage(
+              player.avatar ?? 'https://via.placeholder.com/150',
+            ),
+          ),
+          const Text('Profile'),
           Text('Email: ${session.user.email}'),
           Text('pseudo: ${player.pseudonym}'),
           Text('Name: ${player.firstname} ${player.lastname}'),

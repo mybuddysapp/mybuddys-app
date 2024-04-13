@@ -1,9 +1,9 @@
-// const String HOST = 'http://192.168.1.134';
-const String HOST = 'http://localhost';
+const String HOST = 'http://192.168.1.202';
+// const String HOST = 'http://localhost';
 const String URL = '$HOST:8080';
 
-// const String API_URL = '$URL/api/v1';
-const String API_URL = 'http://192.168.1.134:8080/api/v1';
+const String API_URL = '$URL/api/v1';
+// const String API_URL = 'http://192.168.1.134:8080/api/v1';
 
 
 //SUPABASE

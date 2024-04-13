@@ -14,7 +14,7 @@ import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
 class Home extends StatefulWidget {
-  Home({super.key});
+  const Home({super.key});
 
   @override
   State<Home> createState() => _HomeState();

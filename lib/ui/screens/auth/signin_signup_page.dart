@@ -7,15 +7,17 @@ import 'package:mybuddys/algo/routes/route_config.dart';
 import 'package:mybuddys/extensions/build_context.dart';
 import 'package:mybuddys/extensions/connection_state.dart';
 
-
 class SignInSignUpPage extends HookConsumerWidget {
   const SignInSignUpPage({super.key});
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final emailController = useTextEditingController(text: '');
     final passwordController = useTextEditingController(text: '');
     final login = useState<Future<void>?>(null);
     final loginSnap = useFuture(login.value);
+    final signup = useState<Future<void>?>(null);
+    final signupSnap = useFuture(signup.value);
     // final auth = ref.watch(authProvider);
 
     //auth.isAuthenticated();
@@ -47,15 +49,30 @@ class SignInSignUpPage extends HookConsumerWidget {
               onPressed: loginSnap.isWaiting
                   ? null
                   : () async {
-                login.value = ref.read(authProvider.notifier).login(
-                  emailController.text,
-                  passwordController.text,
-                );
-                context.go(APP.home.toName);
-              },
+                      login.value = ref.read(authProvider.notifier).login(
+                            emailController.text,
+                            passwordController.text,
+                          );
+                      context.go(APP.home.toName);
+                    },
               child: BtnChild(
                 loading: loginSnap.isWaiting,
                 child: const Text('Login Here'),
+              ),
+            ),
+            ElevatedButton(
+              onPressed: signupSnap.isWaiting
+                  ? null
+                  : () async {
+                      signup.value = ref.read(authProvider.notifier).signUp(
+                            emailController.text,
+                            passwordController.text,
+                          );
+                      context.go(APP.home.toName);
+                    },
+              child: BtnChild(
+                loading: loginSnap.isWaiting,
+                child: const Text('Sign Up Here'),
               ),
             ),
           ],

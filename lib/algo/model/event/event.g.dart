@@ -13,7 +13,8 @@ _$EventImpl _$$EventImplFromJson(Map<String, dynamic> json) => _$EventImpl(
       created_at: DateTime.parse(json['created_at'] as String),
       modified_at: DateTime.parse(json['modified_at'] as String),
       datetime: DateTime.parse(json['datetime'] as String),
-      location: json['location'] as String,
+      location: json['location'] as String?,
+      address: Address.fromJson(json['address'] as Map<String, dynamic>),
       activity: Activity.fromJson(json['activity'] as Map<String, dynamic>),
       players:
           (json['players'] as List<dynamic>).map((e) => e as String).toList(),
@@ -29,6 +30,7 @@ Map<String, dynamic> _$$EventImplToJson(_$EventImpl instance) =>
       'modified_at': instance.modified_at.toIso8601String(),
       'datetime': instance.datetime.toIso8601String(),
       'location': instance.location,
+      'address': instance.address,
       'activity': instance.activity,
       'players': instance.players,
       'picture': instance.picture,

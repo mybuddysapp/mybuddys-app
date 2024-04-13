@@ -32,7 +32,7 @@ class MyEventCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // SizedBox(height: 4),
-            Text(event.location),
+            Text(event.address.city),
             // SizedBox(height: 4),
             Text('Activity: ${event.activity.name}'),
           ],
@@ -52,9 +52,9 @@ class MyEventCard extends StatelessWidget {
         ),
 
         // the trailing should be the date of the event
-        // trailing: MyDateWidget(
-        //   datatime: event.datetime,
-        // ),
+        trailing: MyDateWidget(
+          datatime: event.datetime,
+        ),
 
         onTap: () {
           context.pushNamed(
@@ -79,25 +79,27 @@ class MyDateWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     // display the  month and day of the event and the time of the event in vertical order
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+
       children: [
         Text(
           datatime.month.toString(),
           style: const TextStyle(
-            fontSize: 18,
+            fontSize: 12,
             fontWeight: FontWeight.bold,
           ),
         ),
         Text(
           datatime.day.toString(),
           style: const TextStyle(
-            fontSize: 18,
+            fontSize: 12,
             fontWeight: FontWeight.bold,
           ),
         ),
         Text(
           '${datatime.hour}:${datatime.minute}',
           style: const TextStyle(
-            fontSize: 18,
+            fontSize: 12,
             fontWeight: FontWeight.bold,
           ),
         ),

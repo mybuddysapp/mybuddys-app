@@ -26,7 +26,8 @@ mixin _$Event {
   DateTime get created_at => throw _privateConstructorUsedError;
   DateTime get modified_at => throw _privateConstructorUsedError;
   DateTime get datetime => throw _privateConstructorUsedError;
-  String get location => throw _privateConstructorUsedError;
+  String? get location => throw _privateConstructorUsedError;
+  Address get address => throw _privateConstructorUsedError;
   Activity get activity => throw _privateConstructorUsedError;
   List<String> get players => throw _privateConstructorUsedError;
   String? get picture => throw _privateConstructorUsedError;
@@ -48,11 +49,13 @@ abstract class $EventCopyWith<$Res> {
       DateTime created_at,
       DateTime modified_at,
       DateTime datetime,
-      String location,
+      String? location,
+      Address address,
       Activity activity,
       List<String> players,
       String? picture});
 
+  $AddressCopyWith<$Res> get address;
   $ActivityCopyWith<$Res> get activity;
 }
 
@@ -75,7 +78,8 @@ class _$EventCopyWithImpl<$Res, $Val extends Event>
     Object? created_at = null,
     Object? modified_at = null,
     Object? datetime = null,
-    Object? location = null,
+    Object? location = freezed,
+    Object? address = null,
     Object? activity = null,
     Object? players = null,
     Object? picture = freezed,
@@ -105,10 +109,14 @@ class _$EventCopyWithImpl<$Res, $Val extends Event>
           ? _value.datetime
           : datetime // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      location: null == location
+      location: freezed == location
           ? _value.location
           : location // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
+      address: null == address
+          ? _value.address
+          : address // ignore: cast_nullable_to_non_nullable
+              as Address,
       activity: null == activity
           ? _value.activity
           : activity // ignore: cast_nullable_to_non_nullable
@@ -122,6 +130,14 @@ class _$EventCopyWithImpl<$Res, $Val extends Event>
           : picture // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $AddressCopyWith<$Res> get address {
+    return $AddressCopyWith<$Res>(_value.address, (value) {
+      return _then(_value.copyWith(address: value) as $Val);
+    });
   }
 
   @override
@@ -147,11 +163,14 @@ abstract class _$$EventImplCopyWith<$Res> implements $EventCopyWith<$Res> {
       DateTime created_at,
       DateTime modified_at,
       DateTime datetime,
-      String location,
+      String? location,
+      Address address,
       Activity activity,
       List<String> players,
       String? picture});
 
+  @override
+  $AddressCopyWith<$Res> get address;
   @override
   $ActivityCopyWith<$Res> get activity;
 }
@@ -173,7 +192,8 @@ class __$$EventImplCopyWithImpl<$Res>
     Object? created_at = null,
     Object? modified_at = null,
     Object? datetime = null,
-    Object? location = null,
+    Object? location = freezed,
+    Object? address = null,
     Object? activity = null,
     Object? players = null,
     Object? picture = freezed,
@@ -203,10 +223,14 @@ class __$$EventImplCopyWithImpl<$Res>
           ? _value.datetime
           : datetime // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      location: null == location
+      location: freezed == location
           ? _value.location
           : location // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
+      address: null == address
+          ? _value.address
+          : address // ignore: cast_nullable_to_non_nullable
+              as Address,
       activity: null == activity
           ? _value.activity
           : activity // ignore: cast_nullable_to_non_nullable
@@ -233,7 +257,8 @@ class _$EventImpl with DiagnosticableTreeMixin implements _Event {
       required this.created_at,
       required this.modified_at,
       required this.datetime,
-      required this.location,
+      this.location,
+      required this.address,
       required this.activity,
       required final List<String> players,
       this.picture})
@@ -255,7 +280,9 @@ class _$EventImpl with DiagnosticableTreeMixin implements _Event {
   @override
   final DateTime datetime;
   @override
-  final String location;
+  final String? location;
+  @override
+  final Address address;
   @override
   final Activity activity;
   final List<String> _players;
@@ -271,7 +298,7 @@ class _$EventImpl with DiagnosticableTreeMixin implements _Event {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Event(id: $id, name: $name, description: $description, created_at: $created_at, modified_at: $modified_at, datetime: $datetime, location: $location, activity: $activity, players: $players, picture: $picture)';
+    return 'Event(id: $id, name: $name, description: $description, created_at: $created_at, modified_at: $modified_at, datetime: $datetime, location: $location, address: $address, activity: $activity, players: $players, picture: $picture)';
   }
 
   @override
@@ -286,6 +313,7 @@ class _$EventImpl with DiagnosticableTreeMixin implements _Event {
       ..add(DiagnosticsProperty('modified_at', modified_at))
       ..add(DiagnosticsProperty('datetime', datetime))
       ..add(DiagnosticsProperty('location', location))
+      ..add(DiagnosticsProperty('address', address))
       ..add(DiagnosticsProperty('activity', activity))
       ..add(DiagnosticsProperty('players', players))
       ..add(DiagnosticsProperty('picture', picture));
@@ -308,6 +336,7 @@ class _$EventImpl with DiagnosticableTreeMixin implements _Event {
                 other.datetime == datetime) &&
             (identical(other.location, location) ||
                 other.location == location) &&
+            (identical(other.address, address) || other.address == address) &&
             (identical(other.activity, activity) ||
                 other.activity == activity) &&
             const DeepCollectionEquality().equals(other._players, _players) &&
@@ -325,6 +354,7 @@ class _$EventImpl with DiagnosticableTreeMixin implements _Event {
       modified_at,
       datetime,
       location,
+      address,
       activity,
       const DeepCollectionEquality().hash(_players),
       picture);
@@ -351,7 +381,8 @@ abstract class _Event implements Event {
       required final DateTime created_at,
       required final DateTime modified_at,
       required final DateTime datetime,
-      required final String location,
+      final String? location,
+      required final Address address,
       required final Activity activity,
       required final List<String> players,
       final String? picture}) = _$EventImpl;
@@ -371,7 +402,9 @@ abstract class _Event implements Event {
   @override
   DateTime get datetime;
   @override
-  String get location;
+  String? get location;
+  @override
+  Address get address;
   @override
   Activity get activity;
   @override

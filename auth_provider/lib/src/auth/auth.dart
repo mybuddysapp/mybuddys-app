@@ -223,7 +223,7 @@ class Auth extends _$Auth {
   Future<String?> login(String email, String password) async {
     try {
       var res=await supabase.auth.signInWithPassword(password: password, email: email);
-      debugPrint("---------------------from auth.dart: $res");
+      debugPrint("Logged in successfully");
       return null;
     } on AuthException catch (er) {
       // print(er.message);
