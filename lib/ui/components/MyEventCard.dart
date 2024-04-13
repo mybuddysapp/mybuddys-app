@@ -1,10 +1,9 @@
 import 'package:easy_date_timeline/easy_date_timeline.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 import 'package:mybuddys/algo/model/event/event.dart';
 import 'package:mybuddys/algo/routes/route_config.dart';
-
-
 
 class MyEventCard extends StatelessWidget {
   final Event event;
@@ -18,9 +17,9 @@ class MyEventCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 2,
-      // margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(6),
+        borderRadius: BorderRadius.circular(12),
       ),
       child: ListTile(
         // contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -31,14 +30,14 @@ class MyEventCard extends StatelessWidget {
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // SizedBox(height: 4),
+            SizedBox(height: 4),
             Text(event.address.city),
-            // SizedBox(height: 4),
+            SizedBox(height: 4),
             Text('Activity: ${event.activity.name}'),
           ],
         ),
         // get the event photo from event.picture or use a default image as leading
-        leading: SizedBox(
+        trailing: SizedBox(
           // width: 60,
           // height: 60,
           child: event.picture != null
@@ -52,8 +51,8 @@ class MyEventCard extends StatelessWidget {
         ),
 
         // the trailing should be the date of the event
-        trailing: MyDateWidget(
-          datatime: event.datetime,
+        leading: MyDateWidget(
+          datetime: event.datetime,
         ),
 
         onTap: () {
@@ -66,44 +65,64 @@ class MyEventCard extends StatelessWidget {
     );
   }
 }
-
 class MyDateWidget extends StatelessWidget {
-  final DateTime datatime;
+  final DateTime datetime;
 
   const MyDateWidget({
-    super.key,
-    required this.datatime,
-  });
+    Key? key,
+    required this.datetime,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // display the  month and day of the event and the time of the event in vertical order
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-
-      children: [
-        Text(
-          datatime.month.toString(),
-          style: const TextStyle(
-            fontSize: 12,
-            fontWeight: FontWeight.bold,
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(12),
+        color: Colors.grey[200],
+      ),
+      width: 100, // Adjust the width as needed
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            padding: const EdgeInsets.symmetric(vertical: 8),
+            decoration: BoxDecoration(
+              color: Colors.blue,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Text(
+              DateFormat('EEEE').format(datetime).characters.take(3).join(),
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 12,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ),
-        ),
-        Text(
-          datatime.day.toString(),
-          style: const TextStyle(
-            fontSize: 12,
-            fontWeight: FontWeight.bold,
+          SizedBox(width: 8),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                DateFormat('dd').format(datetime),
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              SizedBox(height: 8),
+              Text(
+                DateFormat('hh:mm').format(datetime),
+                style: TextStyle(
+                  fontSize: 8,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
           ),
-        ),
-        Text(
-          '${datatime.hour}:${datatime.minute}',
-          style: const TextStyle(
-            fontSize: 12,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

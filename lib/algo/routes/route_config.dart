@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mybuddys/algo/model/event/event.dart';
+import 'package:mybuddys/ui/screens/auth/RegisterPage.dart';
 import 'package:mybuddys/ui/screens/calendar/CalendarPage.dart';
 import 'package:mybuddys/ui/screens/event/events.dart';
 
@@ -139,15 +140,6 @@ extension AppPageExtension on APP {
   }
 }
 
-extension GoRouterExtension on BuildContext {
-  Future<bool> goBack() async {
-    final canPop = Navigator.of(this).canPop();
-    if (canPop) {
-      Navigator.of(this).pop();
-    }
-    return canPop;
-  }
-}
 
 final routerProvider = Provider((ref) {
   return _routeConfig(redirect: (context, state) {
@@ -155,15 +147,26 @@ final routerProvider = Provider((ref) {
     final isAuthenticated = !auth.isEmpty;
 
     final loginLocation = state.namedLocation(APP.login.toName);
-    if (!isAuthenticated) {
-      return loginLocation;
+    final registerLocation = state.namedLocation(APP.signUp.toName);
+
+    final currentPath = state.uri.path;
+
+    debugPrint("currentPath: $currentPath");
+    debugPrint("isAuthenticated: $isAuthenticated");
+    debugPrint("--->" + (!isAuthenticated &&
+        (currentPath != loginLocation || currentPath != registerLocation))
+        .toString());
+    if (!isAuthenticated &&
+        (currentPath != loginLocation || currentPath != registerLocation)) {
+      return registerLocation;
     }
     return null;
   });
 });
 
-GoRouter _routeConfig({GoRouterRedirect? redirect}) => GoRouter(
-      initialLocation: APP.home.toPath,
+GoRouter _routeConfig({GoRouterRedirect? redirect}) =>
+    GoRouter(
+      initialLocation: APP.signUp.toPath,
       redirect: redirect,
       routes: [
         GoRoute(
@@ -191,12 +194,12 @@ GoRouter _routeConfig({GoRouterRedirect? redirect}) => GoRouter(
         GoRoute(
           path: APP.signUp.toPath,
           name: APP.signUp.toName,
-          builder: (context, state) => SignInSignUpPage(),
+          builder: (context, state) => RegisterPage(),
         ),
         GoRoute(
           path: APP.login.toPath,
           name: APP.login.toName,
-          builder: (context, state) => SignInSignUpPage(),
+          builder: (context, state) => RegisterPage(),
         ),
         GoRoute(
           path: APP.splash.toPath,

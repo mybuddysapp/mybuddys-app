@@ -65,6 +65,7 @@ dependencies:
   easy_date_timeline: ^1.0.6
   geolocator: ^11.0.0
   riverpod_test: ^0.1.4
+  nylo_framework: ^2.0.4
 
 dev_dependencies:
   flutter_test:

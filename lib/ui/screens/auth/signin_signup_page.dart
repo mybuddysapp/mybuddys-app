@@ -61,19 +61,22 @@ class SignInSignUpPage extends HookConsumerWidget {
               ),
             ),
             ElevatedButton(
-              onPressed: signupSnap.isWaiting
-                  ? null
-                  : () async {
-                      signup.value = ref.read(authProvider.notifier).signUp(
-                            emailController.text,
-                            passwordController.text,
-                          );
-                      context.go(APP.home.toName);
-                    },
-              child: BtnChild(
-                loading: loginSnap.isWaiting,
-                child: const Text('Sign Up Here'),
-              ),
+              // onPressed: signupSnap.isWaiting
+              //     ? null
+              //     : () async {
+              //         signup.value = ref.read(authProvider.notifier).signUp(
+              //               emailController.text,
+              //               passwordController.text,
+              //             );
+              onPressed: () {
+                debugPrint('*********************** Sing successful ::: ');
+                context.goNamed(APP.signUp.toName);
+              },
+              // },
+              // child: BtnChild(
+              //   loading: loginSnap.isWaiting,
+              child: const Text('Register'),
+              // ),
             ),
           ],
         ),
