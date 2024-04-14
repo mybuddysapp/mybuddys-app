@@ -19,10 +19,10 @@ class ErrorScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text("Error Screen"),
+            const Text("Error Screen"),
             ElevatedButton(
               // Go to home screen
-              child: Text("HOME"),
+              child: const Text("HOME"),
               onPressed: () {
                 onPressed(context);
               },
@@ -31,7 +31,7 @@ class ErrorScreen extends StatelessWidget {
                 onPressed: () {
                   context.go(APP.splash.toPath);
                 },
-                child: Text("Splash Screen")),
+                child: const Text("Splash Screen")),
           ],
         ),
       ),

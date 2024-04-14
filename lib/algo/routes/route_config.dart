@@ -147,18 +147,19 @@ final routerProvider = Provider((ref) {
     final isAuthenticated = !auth.isEmpty;
 
     final loginLocation = state.namedLocation(APP.login.toName);
-    final registerLocation = state.namedLocation(APP.signUp.toName);
-
-    final currentPath = state.uri.path;
-
-    debugPrint("currentPath: $currentPath");
-    debugPrint("isAuthenticated: $isAuthenticated");
-    debugPrint("--->" + (!isAuthenticated &&
-        (currentPath != loginLocation || currentPath != registerLocation))
-        .toString());
-    if (!isAuthenticated &&
-        (currentPath != loginLocation || currentPath != registerLocation)) {
-      return registerLocation;
+    // final registerLocation = state.namedLocation(APP.signUp.toName);
+    //
+    // final currentPath = state.uri.path;
+    //
+    // debugPrint("currentPath: $currentPath");
+    // debugPrint("isAuthenticated: $isAuthenticated");
+    // debugPrint("--->" + (!isAuthenticated &&
+    //     (currentPath != loginLocation || currentPath != registerLocation))
+    //     .toString());
+    if (!isAuthenticated ){
+        // &&
+        // (currentPath != loginLocation || currentPath != registerLocation)) {
+      return loginLocation;
     }
     return null;
   });
@@ -166,7 +167,7 @@ final routerProvider = Provider((ref) {
 
 GoRouter _routeConfig({GoRouterRedirect? redirect}) =>
     GoRouter(
-      initialLocation: APP.signUp.toPath,
+      initialLocation: APP.home.toPath,
       redirect: redirect,
       routes: [
         GoRoute(

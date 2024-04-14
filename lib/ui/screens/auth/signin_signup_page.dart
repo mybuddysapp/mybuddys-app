@@ -7,8 +7,8 @@ import 'package:mybuddys/algo/routes/route_config.dart';
 import 'package:mybuddys/extensions/build_context.dart';
 import 'package:mybuddys/extensions/connection_state.dart';
 
-class SignInSignUpPage extends HookConsumerWidget {
-  const SignInSignUpPage({super.key});
+class LoginPage extends HookConsumerWidget {
+  const LoginPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

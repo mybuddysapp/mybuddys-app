@@ -10,7 +10,7 @@ class MyBottomNavigationBar extends StatefulWidget {
   final String currentRoute;
   final ScrollController controller;
 
-  MyBottomNavigationBar(
+  const MyBottomNavigationBar(
       {super.key, required this.currentRoute, required this.controller});
 
   @override
