@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mybuddys/routes/route_config.dart';
 
 extension ContextExtension on BuildContext {
   TextTheme get textTheme => Theme.of(this).textTheme;
@@ -11,6 +12,12 @@ extension ContextExtension on BuildContext {
 
   double get width => size.width;
 }
+
+// extension RouteTo on BuildContext {
+//   void routeTo(app_route route) {
+//     Navigator.of(this).pushNamed(route.path);
+//   }
+// }
 
 extension ShowSnackBar on BuildContext {
   /// Displays a basic snackbar

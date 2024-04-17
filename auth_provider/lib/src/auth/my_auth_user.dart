@@ -2,7 +2,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-
 part 'my_auth_user.freezed.dart';
 part 'my_auth_user.g.dart';
 

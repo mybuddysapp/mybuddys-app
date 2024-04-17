@@ -1,11 +1,15 @@
 import 'package:auth_provider/auth_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:mybuddys/algo/routes/route_config.dart';
+import 'package:mybuddys/routes/route_config.dart';
 import 'package:mybuddys/utils/consts.dart';
+import 'package:nylo_support/nylo.dart';
+
+import 'bootstrap/boot.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  Nylo nylo = await Nylo.init(setup: Boot.nylo, setupFinished: Boot.finished);
 
   // initialize the user repository
   await SupabaseAuthProvider.initialize(

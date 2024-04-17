@@ -55,20 +55,33 @@ dependencies:
   persistent_bottom_nav_bar: ^5.0.2
   flutter_chat_ui: ^1.6.12
   async: ^2.11.0
-  dio: ^5.4.2+1
+  dio: ^5.4.3+1
   intl: ^0.18.1
   wolt_modal_sheet: ^0.5.0
-#  chat_bubbles: ^1.6.0
+  #  chat_bubbles: ^1.6.0
   audioplayers: ^6.0.0
   cached_network_image: ^3.3.1
   custom_refresh_indicator: ^3.1.0
-#  easy_date_timeline: ^1.0.6
+  #  easy_date_timeline: ^1.0.6
   geolocator: ^11.0.0
   riverpod_test: ^0.1.4
   nylo_framework: 5.25.1
   nylo_support: ^5.63.0
+  google_fonts: ^6.2.1
+  flutter_form_builder: ^9.2.1
+  form_builder_validators: ^9.1.0
+  url_launcher: ^6.2.6
+
+  #forms
+  gsform: ^0.3.5
+
+  # slivers
+  sliver_app_bar_builder: ^1.1.0
+  babstrap_settings_screen: ^0.1.6
+  icons_plus: ^5.0.0
 
 dev_dependencies:
+  flutter_launcher_icons: ^0.13.1
   flutter_test:
     sdk: flutter
 
@@ -82,10 +95,15 @@ dev_dependencies:
   build_runner: ^2.4.9
   custom_lint: ^0.6.4
   riverpod_lint: ^2.3.10
-  freezed: ^2.5.0
+  freezed: ^2.5.2
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "public/assets/app_icon/icon.png"
+  remove_alpha_ios: true
 
 # The following section is specific to Flutter packages.
 flutter:
@@ -96,15 +114,22 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  assets:
-    - assets/
-    - assets/plane_indicator/
+  #  assets:
+  #    - assets/
+  #    - assets/plane_indicator/
 
-#assets:
-#  - assets/plane_indicator/
-#  - assets/plane_indicator/plane.png
-#  - plane_indicator/plane.png
-#  #   - images/a_dot_burr.jpeg
+  assets:
+    - public/assets/fonts/
+    - public/assets/images/
+    - public/assets/app_icon/
+    - lang/
+    - .env
+
+  #assets:
+  #  - assets/plane_indicator/
+  #  - assets/plane_indicator/plane.png
+  #  - plane_indicator/plane.png
+  #  #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
