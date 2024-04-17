@@ -35,7 +35,7 @@ dependencies:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.6
+  cupertino_icons: ^1.0.8
   flutter_login: ^5.0.0
   http: ^1.2.1
   equatable: ^2.0.5
@@ -65,20 +65,22 @@ dependencies:
   #  easy_date_timeline: ^1.0.6
   geolocator: ^11.0.0
   riverpod_test: ^0.1.4
-  nylo_framework: 5.25.1
-  nylo_support: ^5.63.0
+  nylo_framework: ^5.25.2
+  nylo_support: ^5.64.0
   google_fonts: ^6.2.1
   flutter_form_builder: ^9.2.1
   form_builder_validators: ^9.1.0
   url_launcher: ^6.2.6
 
   #forms
-  gsform: ^0.3.5
 
   # slivers
   sliver_app_bar_builder: ^1.1.0
   babstrap_settings_screen: ^0.1.6
   icons_plus: ^5.0.0
+#  get: ^5.0.0-release-candidate-5
+  get: ^4.6.6
+  modal_bottom_sheet: ^3.0.0
 
 dev_dependencies:
   flutter_launcher_icons: ^0.13.1
