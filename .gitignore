@@ -4,3 +4,4 @@
 *.dart
 /.dart_tool
 /.idea
+/lib copy/
