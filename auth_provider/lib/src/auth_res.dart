@@ -1,4 +1,4 @@
-import 'package:auth_provider/auth_provider.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 enum Status { success, error }
 
