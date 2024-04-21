@@ -5,3 +5,6 @@
 /.dart_tool
 /.idea
 /lib copy/
+pubspec.lock
+.flutter-plugins
+.flutter-plugins-dependencies
