@@ -30,7 +30,7 @@ class Nav {
   static List<GetPage> routes = [
     GetPage(
       name: Routes.AUTH,
-      page: () => const AuthScreen(),
+      page: () =>  const AuthScreen(),
       binding: AuthControllerBinding(),
       // middlewares: [MyMiddleware()],
     ),
@@ -48,7 +48,7 @@ class Nav {
           name: Routes.PROFILE,
           page: () => const ProfileScreen(),
           binding: ProfileControllerBinding(),
-          middlewares: [MyMiddleware()],
+          // middlewares: [MyMiddleware()],
         ),
         GetPage(
           name: Routes.EVENTS,
@@ -69,7 +69,7 @@ class Nav {
           name: Routes.SETTINGS,
           page: () => const SettingsScreen(),
           binding: SettingsControllerBinding(),
-          middlewares: [MyMiddleware()],
+          // middlewares: [MyMiddleware()],
         ),
         GetPage(
           name: Routes.CALENDAR,

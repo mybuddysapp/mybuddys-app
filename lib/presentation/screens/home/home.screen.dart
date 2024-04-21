@@ -17,7 +17,7 @@ class HomeScreen extends GetView<HomeController> {
         onPageChanged: (index) {
           controller.changeTabIndex(index);
         },
-        children:  [
+        children: const [
           EventScreen(),
           TeamsScreen(),
           MessagesScreen(),

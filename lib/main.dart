@@ -29,9 +29,9 @@ class Main extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.changeTheme(
-      Get.isDarkMode ? ThemeData.light() : ThemeData.dark(),
-    );
+    // Get.changeTheme(
+    //   Get.isDarkMode ? ThemeData.light() : ThemeData.dark(),
+    // );
     return GetMaterialApp(
       title: 'MyBuddys',
       debugShowCheckedModeBanner: false,

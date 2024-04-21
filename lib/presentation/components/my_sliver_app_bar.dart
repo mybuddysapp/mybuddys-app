@@ -82,7 +82,7 @@ class MySliverAppBar extends StatelessWidget {
               )
             : Container(
                 color: Colors.blueGrey,
-                child: Icon(avatarIcon, size: 200),
+                child: Icon(avatarIcon, size: 200, color: Color(0xFF888888)),
               ),
       ),
     );

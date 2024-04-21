@@ -51,6 +51,7 @@ dependencies:
     path: auth_provider
   flutter_dotenv: ^5.1.0
   lo_form: ^0.5.0
+  reactive_forms: ^16.1.1
 
 dev_dependencies:
   flutter_launcher_icons: ^0.13.1

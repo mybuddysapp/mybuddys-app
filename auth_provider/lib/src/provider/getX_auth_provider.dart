@@ -64,39 +64,63 @@ class AuthController extends GetxController {
     });
   }
 
-  Future<void> login(String email, String password) async {
+  Future<String?> login(String email, String password) async {
     try {
       final response = await _supabaseClient.auth
           .signInWithPassword(email: email, password: password);
-      if (response.user != null || response.session != null) {
+      if (response.user != null && response.session != null) {
         user.value = response.user;
         session.value = response.session;
         update();
+        return null;
+      } else {
+        return "server not responding";
       }
+    } on AuthException catch (e) {
+      // Handle error
+      debugPrint("Error signing in: $e");
+      user.value = null;
+      session.value = null;
+      update();
+      return e.message.toString();
     } catch (e) {
       // Handle error
       debugPrint("Error signing in: $e");
       user.value = null;
       session.value = null;
       update();
+      return e.toString();
     }
   }
 
-  Future<void> register(String email, String password) async {
+  Future<String?> register(String email, String password) async {
     try {
+      print("Registering user"
+          "email: $email"
+          "password: $password");
       final response =
           await _supabaseClient.auth.signUp(email: email, password: password);
-      if (response.user != null || response.session != null) {
+      if (response.user != null && response.session != null) {
         user.value = response.user;
         session.value = response.session;
+        return null;
+      } else {
+        return "server not responding";
       }
       update();
-    } catch (e) {
+    } on AuthException catch (e) {
       // Handle error
       debugPrint("Error signing up: $e");
       user.value = null;
       session.value = null;
       update();
+      return e.message.toString();
+    } catch (e) {
+      debugPrint("Error signing up: $e");
+      user.value = null;
+      session.value = null;
+      update();
+      return e.toString();
     }
   }
 
@@ -104,24 +128,42 @@ class AuthController extends GetxController {
     await signOut();
   }
 
-  Future<void> signOut() async {
+  Future<String?> signOut() async {
     try {
       await _supabaseClient.auth.signOut();
       user.value = null;
       session.value = null;
       update();
+      return null;
+    } on AuthException catch (e) {
+      // Handle error
+      debugPrint("Error signing up: $e");
+      user.value = null;
+      session.value = null;
+      update();
+      return e.message.toString();
     } catch (e) {
       // Handle error
       debugPrint("Error signing out: $e");
+      return e.toString();
     }
   }
 
-  Future<void> forgetPassword(String email) async {
+  Future<String?> forgetPassword(String email) async {
     try {
       await _supabaseClient.auth.resetPasswordForEmail(email);
+      return null;
+    } on AuthException catch (e) {
+      // Handle error
+      debugPrint("Error signing up: $e");
+      user.value = null;
+      session.value = null;
+      update();
+      return e.message.toString();
     } catch (e) {
       // Handle error
       debugPrint("Error resetting password: $e");
+      return e.toString();
     }
   }
 

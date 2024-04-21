@@ -10,7 +10,7 @@ class MyMiddleware extends GetMiddleware {
   RouteSettings? redirect(String? route) {
     print('>>> Route $route called  -- '+authController.isAuthenticated.toString());
     return authController.isAuthenticated
-        ? const RouteSettings(name: Routes.HOME)
+        ? const RouteSettings(name: Routes.ROOT)
         : const RouteSettings(name: Routes.AUTH);
   }
 
