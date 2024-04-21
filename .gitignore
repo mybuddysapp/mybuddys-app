@@ -4,3 +4,13 @@
 *.dart
 /.dart_tool
 /.idea
+/lib copy/
+pubspec.lock
+.flutter-plugins
+.flutter-plugins-dependencies
+.flutter-plugins
+.flutter-plugins-dependencies
+/build
+.flutter-plugins
+pubspec.lock
+.flutter-plugins-dependencies
