@@ -17,11 +17,20 @@
 	<key>CFBundleName</key>
 	<string>mybuddys</string>
 	<key>CFBundlePackageType</key>
-	<string>APPL</string>
+    <array>
+        <dict>
+            <key>CFBundleTypeRole</key>
+            <string>Editor</string>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>com.googleusercontent.apps.410853899126-ntqs7q26a6tgdojvv0lc3bereofhh48d.apps.googleusercontent.com</string>
+            </array>
+        </dict>
+    </array>
 	<key>CFBundleShortVersionString</key>
 	<string>$(FLUTTER_BUILD_NAME)</string>
 	<key>CFBundleSignature</key>
-	<string>????</string>
+	<string>410853899126-ntqs7q26a6tgdojvv0lc3bereofhh48d.apps.googleusercontent.com</string>
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>
@@ -45,5 +54,13 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+    <key>CLIENT_ID</key>
+    <string>410853899126-ntqs7q26a6tgdojvv0lc3bereofhh48d.apps.googleusercontent.com</string>
+    <key>REVERSED_CLIENT_ID</key>
+    <string>com.googleusercontent.apps.410853899126-ntqs7q26a6tgdojvv0lc3bereofhh48d</string>
+    <key>PLIST_VERSION</key>
+    <string>1</string>
+    <key>BUNDLE_ID</key>
+    <string>com.styne.mybuddys</string>
 </dict>
 </plist>

@@ -1,10 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../auth_provider.dart';
-
+import '../consts.dart';
 
 class AuthController extends GetxController {
   final SupabaseClient _supabaseClient;
@@ -125,20 +124,23 @@ class AuthController extends GetxController {
       debugPrint("Error resetting password: $e");
     }
   }
-  Future<void> _nativeGoogleSignIn() async {
+
+  Future<void> googleSignIn() async {
     /// TODO: update the Web client ID with your own.
     ///
     /// Web Client ID that you registered with Google Cloud.
-    const webClientId = 'my-web.apps.googleusercontent.com';
+    const webClientId =
+        '410853899126-08kp7cmr16bnf77mm3ov172kut1l106v.apps.googleusercontent.com';
 
     /// TODO: update the iOS client ID with your own.
     ///
     /// iOS Client ID that you registered with Google Cloud.
-    const iosClientId = 'my-ios.apps.googleusercontent.com';
+    const iosClientId =
+        '410853899126-ntqs7q26a6tgdojvv0lc3bereofhh48d.apps.googleusercontent.com';
 
     final GoogleSignIn googleSignIn = GoogleSignIn(
-      clientId: iosClientId,
-      serverClientId: webClientId,
+      clientId: clientID(),
+      serverClientId: GOOGLE_CLIENT_ID_WEB,
     );
     final googleUser = await googleSignIn.signIn();
     final googleAuth = await googleUser!.authentication;
@@ -152,30 +154,15 @@ class AuthController extends GetxController {
       throw 'No ID Token found.';
     }
 
-    await supabase.auth.signInWithIdToken(
+    final response = await supabase.auth.signInWithIdToken(
       provider: OAuthProvider.google,
       idToken: idToken,
       accessToken: accessToken,
     );
-  }
 
-  Future<void> googleSignIn() async {
-    try {
-      // final response = await _supabaseClient.auth.
-      //   Provider.google,
-      //   redirectTo: '/',
-      // );
-      // if (response.user != null || response.session != null) {
-      //   user.value = response.user;
-      //   session.value = response.session;
-      // }
-      // update();
-    } catch (e) {
-      // Handle error
-      debugPrint("Error signing in with Google: $e");
-      user.value = null;
-      session.value = null;
-      update();
+    if (response.user != null || response.session != null) {
+      user.value = response.user;
+      session.value = response.session;
     }
   }
 }

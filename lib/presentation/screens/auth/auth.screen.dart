@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:icons_plus/icons_plus.dart';
 import 'package:mybuddys/presentation/components/my_sliver_app_bar.dart';
 
 import '../../components/my_button.dart';
@@ -34,7 +35,7 @@ class AuthScreen extends GetView<AuthScreenController> {
                 color: Colors.white,
               ),
               onPressed: () {
-
+                // controller.navigateToSignUp();
               },
             ),
           ),
@@ -45,13 +46,13 @@ class AuthScreen extends GetView<AuthScreenController> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
-                    height: 200,
-                    width: MediaQuery.of(context).size.width * 0.8,
-                    margin: EdgeInsets.only(
-                        left: MediaQuery.of(context).size.width * 0.09),
-                    child: Image.asset("assets/images/login.png"),
-                  ),
+                  // Container(
+                  //   height: 200,
+                  //   width: MediaQuery.of(context).size.width * 0.8,
+                  //   margin: EdgeInsets.only(
+                  //       left: MediaQuery.of(context).size.width * 0.09),
+                  //   child: Image.asset("assets/images/login.png"),
+                  // ),
                   const SizedBox(
                     height: 24,
                   ),
@@ -78,8 +79,18 @@ class AuthScreen extends GetView<AuthScreenController> {
                   //   textInputAction: TextInputAction.done,
                   //   textInputType: TextInputType.visiblePassword,
                   // ),
+
                   const SizedBox(
                     height: 24,
+                  ),
+                  //google signin
+                  IconButton(
+                    onPressed: () {
+                      controller.authController.googleSignIn();
+                    },
+                    icon: const Icon(
+                      Iconsax.add_bulk,
+                    ),
                   ),
                   Align(
                     alignment: Alignment.centerRight,
@@ -105,7 +116,7 @@ class AuthScreen extends GetView<AuthScreenController> {
                   MyButton(
                     text: 'Log In',
                     onTap: () {
-                      // controller.login();
+                      controller.onLogin();
                     },
                   ),
                   const SizedBox(
@@ -115,8 +126,7 @@ class AuthScreen extends GetView<AuthScreenController> {
                     discription: "Don't already Have an account? ",
                     text: 'Sign Up',
                     onTap: () {
-                      // Navigator.pushReplacement(context,
-                      //     MaterialPageRoute(builder: (context) => const SignUp()));
+                      // controller.navigateToSignUp();
                     },
                   ),
                 ],
