@@ -7,6 +7,8 @@ import 'package:mybuddys/infrastructure/navigation/routes.dart';
 import 'package:mybuddys/presentation/components/my_sliver_app_bar.dart';
 import 'package:mybuddys/presentation/screens/profile/widgets/create_profile/create_profile_sliver.dart';
 
+// import 'package:appwrite/models.dart' as models;
+
 import 'controllers/profile.controller.dart';
 
 class ProfileScreen extends GetView<ProfileController> {
@@ -35,19 +37,26 @@ class ProfileScreen extends GetView<ProfileController> {
               },
             ),
             leftIconWidget: IconButton(
-              style:Get.theme.iconButtonTheme.style,
-              icon:  const Icon(
+              style: Get.theme.iconButtonTheme.style,
+              icon: const Icon(
                 Icons.logout,
               ),
               onPressed: () {
-                Get.find<AuthController>().logout();
+
+                controller.onLogout();
               },
             ),
           ),
           SliverToBoxAdapter(
             child: controller.obx(
               (data) {
-                return _ProfileView(player: data!);
+                // if (data != null) {
+                return _ProfileView(player: data);
+                // } else {
+                //   return Center(
+                //     child: Text('Profile not found'),
+                //   );
+                // }
               },
               onLoading: const Center(
                 child: CircularProgressIndicator(),
@@ -91,13 +100,13 @@ class CreatePlayerProfileWidget extends StatelessWidget {
 }
 
 class _ProfileView extends StatelessWidget {
-  final Player player;
+  final Player? player;
 
   _ProfileView({
     required this.player,
   });
 
-  final Session? session = Get.find<AuthController>().session.value;
+  final session = Get.find<AuthAPI>().value;
 
   @override
   Widget build(BuildContext context) {
@@ -109,20 +118,20 @@ class _ProfileView extends StatelessWidget {
           CircleAvatar(
             radius: 50,
             backgroundImage: NetworkImage(
-              player.avatar ?? 'https://via.placeholder.com/150',
+              player?.avatar ?? 'https://via.placeholder.com/150',
             ),
           ),
           Text('profile'.tr),
-          Text('Email: ${session?.user.email}'),
-          Text('pseudo: ${player.pseudonym}'),
-          Text('Name: ${player.firstname} ${player.lastname}'),
-          Text('DOB: ${player.dob}'),
+          // Text('Email: ${session?.user.email}'),
+          Text('pseudo: ${player?.pseudonym}'),
+          Text('Name: ${player?.firstname} ${player?.lastname}'),
+          Text('DOB: ${player?.dob}'),
           //AGE from DOB
           Text(
-              'Age: ${DateTime.now().year - int.parse(player.dob.substring(0, 4))}'),
-          Text('Bio: ${player.bio}'),
-          Text('Phone: ${player.phone ?? 'N/A'}'),
-          Text('Address: ${player.address}'),
+              'Age: ${DateTime.now().year - int.parse(player!.dob.substring(0, 4))}'),
+          Text('Bio: ${player?.bio}'),
+          Text('Phone: ${player?.phone ?? 'N/A'}'),
+          Text('Address: ${player?.address}'),
 
           // these buttons should be in a row
           Row(

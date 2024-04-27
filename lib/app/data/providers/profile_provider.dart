@@ -25,9 +25,9 @@ class ProfileProvider extends GetConnect {
 
   Future<Player?> getPlayerProfile() async {
     // final client = await ref.getDebouncedDio();
-    final currentUser = Get.find<AuthController>().user;
-    debugPrint("----->" + currentUser.string);
-    final playerProfileUrl = '$url/player/${currentUser.value!.id}';
+    final currentUser = Get.find<AuthAPI>().currentUser;
+    debugPrint("----->" + currentUser!.$id);
+    final playerProfileUrl = '$url/player/${currentUser.$id}';
 
     // final response = await client.get('$API_URL/player/${currentUser.uid}');
 

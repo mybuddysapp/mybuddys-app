@@ -10,9 +10,9 @@ class HomeControllerBinding extends Bindings {
     Get.lazyPut<HomeController>(
       () => HomeController(),
     );
-    Get.lazyPut(
-      () => ProfileController(),
-      fenix: true,
-    );
+    // Get.lazyPut<ProfileController>(
+    //   () => ProfileController(),
+    //   // fenix: true,
+    // );
   }
 }

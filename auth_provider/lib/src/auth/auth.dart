@@ -202,12 +202,12 @@ class Auth extends _$Auth {
     supabase.auth.onAuthStateChange;
     return supabase.auth.currentSession == null
         ? MyAuthUser.empty
-        : MyAuthUser.fromSession(supabase.auth.currentSession!);
+        : MyAuthUser.fromSupabaseSession(supabase.auth.currentSession!);
   }
 
   initListener() {
     _authStateSubscription = supabase.auth.onAuthStateChange.listen((data) {
-      state = MyAuthUser.fromSession(data.session);
+      state = MyAuthUser.fromSupabaseSession(data.session);
     });
   }
 

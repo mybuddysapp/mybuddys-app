@@ -1,3 +1,4 @@
+export 'package:mybuddys/presentation/screens/root/root.screen.dart';
 export 'package:mybuddys/presentation/screens/activity/activity.screen.dart';
 export 'package:mybuddys/presentation/screens/auth/auth.screen.dart';
 export 'package:mybuddys/presentation/screens/calendar/calendar.screen.dart';

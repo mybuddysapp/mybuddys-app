@@ -10,7 +10,7 @@ SliverWoltModalSheetPage page2(
 ) {
 //   final profileProvider = ref.watch(playerProfileProvider.notifier);
 //   final playerProfile = ref.watch(playerProfileProvider);
-  final formKey = GlobalKey<FormState>();
+  final formKey = UniqueKey();
 
   //username field must check with the backend if the username is already taken
 

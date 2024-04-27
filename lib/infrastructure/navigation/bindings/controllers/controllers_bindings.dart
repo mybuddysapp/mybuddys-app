@@ -6,5 +6,6 @@ export 'package:mybuddys/infrastructure/navigation/bindings/controllers/events.c
 export 'package:mybuddys/infrastructure/navigation/bindings/controllers/home.controller.binding.dart'; 
 export 'package:mybuddys/infrastructure/navigation/bindings/controllers/messages.controller.binding.dart';
 export 'package:mybuddys/infrastructure/navigation/bindings/controllers/profile.controller.binding.dart'; 
+export 'package:mybuddys/infrastructure/navigation/bindings/controllers/root.controller.binding.dart'; 
 export 'package:mybuddys/infrastructure/navigation/bindings/controllers/settings.controller.binding.dart';
 export 'package:mybuddys/infrastructure/navigation/bindings/controllers/teams.controller.binding.dart'; 

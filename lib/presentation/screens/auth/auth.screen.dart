@@ -1,8 +1,10 @@
+import 'package:appwrite/appwrite.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lo_form/lo_form.dart';
+import 'package:mybuddys/infrastructure/navigation/routes.dart';
 import 'package:mybuddys/presentation/components/my_button.dart';
 import 'package:mybuddys/presentation/components/my_sliver_app_bar.dart';
 
@@ -15,9 +17,20 @@ class AuthScreen extends GetView<AuthScreenController> {
 
   @override
   Widget build(BuildContext context) {
+    // var client = Account(Client()
+    //     .setEndpoint('http://192.168.1.202:80/v1')
+    //     .setProject('6626d7200023fc1e29fa')
+    //     .setSelfSigned(status: true));
+    //
+    // client.get().then((value) => {print("===============>"), print(value.email)});
+
+    // print("checking in the auth screen if the user is logged in");
+    // if (controller.isLoggedIn) {
+    //   Get.offAllNamed(Routes.HOME);
+    // }
     return Scaffold(
       body: CustomScrollView(
-        key: GlobalKey(),
+        key: UniqueKey(),
         slivers: [
           Obx(
             () => MySliverAppBar(
@@ -59,6 +72,14 @@ class AuthScreen extends GetView<AuthScreenController> {
               ),
             ),
           ),
+          SliverToBoxAdapter(
+            child: Center(
+              child: TextButton(
+                onPressed: () => controller.onGoogleSignIn(),
+                child: const Text('Google login'),
+              ),
+            ),
+          )
         ],
       ),
     );
@@ -66,8 +87,9 @@ class AuthScreen extends GetView<AuthScreenController> {
 
   Widget _loginForm() {
     return LoForm<String>(
-      onReady: controller.loginFormState,
-      onChanged: controller.loginFormState,
+      key: controller.loginFormKey,
+      // onReady: controller.loginFormState,
+      // onChanged: controller.loginFormState,
       submittableWhen: (status) => status.isValid || status.isSubmitted,
       onSubmit: (values, setErrors) =>
           controller.onLoginSubmit(values, setErrors),
@@ -107,8 +129,9 @@ class AuthScreen extends GetView<AuthScreenController> {
 
   Widget _registerForm() {
     return LoForm<String>(
-      onReady: controller.registerFormState,
-      onChanged: controller.registerFormState,
+      key: controller.registerFormKey,
+      // onReady: controller.registerFormState,
+      // onChanged: controller.registerFormState,
       submittableWhen: (status) => status.isValid || status.isSubmitted,
       validators: [
         LoMatchValidator('Password', 'Confirm'),

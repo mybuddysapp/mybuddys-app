@@ -1,9 +1,11 @@
+import 'package:auth_provider/auth_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:mybuddys/app/data/models/player/player.dart';
 import 'package:mybuddys/app/data/providers/profile_provider.dart';
+import 'package:mybuddys/infrastructure/navigation/routes.dart';
 
-class ProfileController extends GetxController with StateMixin<Player> {
+class ProfileController extends GetxController with StateMixin<Player?> {
   // Define an observable list of players
   // final RxList<Player> players = <Player>[].obs;
   ProfileProvider profileProvider = ProfileProvider();
@@ -27,7 +29,6 @@ class ProfileController extends GetxController with StateMixin<Player> {
 
   //method to get current user player porfile
   void getPlayerProfile() {
-
     profileProvider.getPlayerProfile().then((value) {
       change(value, status: RxStatus.success());
     }).catchError((error) {
@@ -40,6 +41,11 @@ class ProfileController extends GetxController with StateMixin<Player> {
         .checkPseudonym(pseudonymController.text)
         .then((isOk) => isPseudoAvailable.value = isOk);
     update();
+  }
+
+  void onLogout() {
+    Get.find<AuthAPI>().signOut();
+    Get.offAllNamed(Routes.ROOT);
   }
 
 // Instantiate PlayerProvider

@@ -20,6 +20,8 @@ class Consts {
       dotenv.env['API_BASE_URL'] ?? 'http://localhost:8080/api/v1';
   static String SUPABASE_URL =
       dotenv.env['API_AUTH_URL'] ?? 'http://localhost:8000';
+  static String APPWRITE_URL =
+      dotenv.env['API_APPWRITE_URL'] ?? 'http://localhost/v1';
 
 // const String API_URL = 'http://192.168.1.134:8080/api/v1';
 

@@ -1,4 +1,4 @@
-package com.styne.frontend
+package com.styne.mybuddys
 
 import io.flutter.embedding.android.FlutterActivity
 
