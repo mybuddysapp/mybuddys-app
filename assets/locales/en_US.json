@@ -38,7 +38,8 @@
     "not_in_schema": "Field not in allowed schema",
     "not_in_type": "Field not in allowed type",
     "not_in_instance": "Field not in allowed instance",
-    "not_in_pattern": "Field not in allowed pattern"
+    "not_in_pattern": "Field not in allowed pattern",
+    "invalid_username_or_password": "Invalid username or password"
   },
   "ask": {
     "existing_page": "The page [%s] already exists, do you want to overwrite it?",

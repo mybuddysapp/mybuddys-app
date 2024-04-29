@@ -1,4 +1,5 @@
 import 'package:auth_provider/auth_provider.dart';
+import 'package:auth_provider/src/auth/service/exception_service.dart';
 import 'package:auth_provider/src/auth/token_manager.dart';
 import 'package:dio/dio.dart';
 
@@ -16,8 +17,12 @@ class Api {
             options.path = AUTH_API_URL + options.path;
           }
           options.headers['Content-Type'] = 'application/json';
-          options.headers['Authorization'] =
-              'Bearer ${await tokenManager.getToken()}';
+          var localToken = await tokenManager.getToken();
+          localToken != null
+              ? options.headers['Authorization'] =
+                  'Bearer ${await tokenManager.getToken()}'
+              : null;
+
           return handler.next(options);
         },
         onError: (DioException error, handler) async {
@@ -30,9 +35,6 @@ class Api {
             }
           }
           logger.e(error);
-          if (error.error==DioExceptionType.connectionError) {
-            return handler.reject(error);
-          }
           return handler.next(error);
         },
       ),

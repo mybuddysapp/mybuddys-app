@@ -1,6 +1,9 @@
 import 'package:auth_provider/src/auth/api.dart';
+import 'package:auth_provider/src/auth/exception/auth_exception.dart';
 import 'package:auth_provider/src/auth/service/auth_service.dart';
 import 'package:auth_provider/src/auth/token_manager.dart';
+import 'package:auth_provider/src/model/register_response_error_model.dart';
+import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 
@@ -60,39 +63,38 @@ class AuthAPI extends GetxService {
   }
 
   Future<void> login(String email, String password) async {
-    try {
-      final tokenRes =
-          await _authService.login({'email': email, 'password': password});
-      final token = tokenRes.access;
-      final refreshToken = tokenRes.refresh;
-      await _tokenManager.saveToken(token);
-      await _tokenManager.saveRefreshToken(refreshToken);
+    // try {
+    final tokenRes =
+        await _authService.login({'email': email, 'password': password});
+    final token = tokenRes.access;
+    final refreshToken = tokenRes.refresh;
+    await _tokenManager.saveToken(token);
+    await _tokenManager.saveRefreshToken(refreshToken);
 
-      logger.d(tokenRes.access);
-      logger.d(tokenRes.refresh);
-      _status.value = AuthStatus.authenticated;
-      // Token is cached
-    } catch (e) {
-      _status.value = AuthStatus.unauthenticated;
-      logger.e(e);
-    }
+    logger.d(tokenRes.access);
+    logger.d(tokenRes.refresh);
+    _status.value = AuthStatus.authenticated;
   }
 
   Future<void> register(String email, String password) async {
     try {
       final user =
           await _authService.register({'email': email, 'password': password});
-      // _userId.value = user.id;
-      // _userEmail.value = user.email;
-      // _isLogged.value = true;
-    } catch (e) {
-      _tokenManager.removeTokens();
-      // _userEmail.value = '';
-      // _userId.value = '';
-      // _isLogged.value = false;
-      _status.value = AuthStatus.uninitialized;
-      logger.e(e);
+    } on DioException catch (e) {
+      if (e.response?.statusCode == 400) {
+        var errors = RegisterResponseErrorModel.fromJson(e.response?.data);
+        String errorMessages = '';
+        errors.email?.forEach((element) {
+          errorMessages += '$element\n';
+        });
+        errors.password?.forEach((element) {
+          errorMessages += '$element\n';
+        });
+        throw AuthException(errorMessages);
+      }
+      rethrow;
     }
+    login(email, password);
   }
 
   Future<void> checkLoginStatus() async {
@@ -111,6 +113,7 @@ class AuthAPI extends GetxService {
       _userEmail.value = user.email;
     } catch (e) {
       _status.value = AuthStatus.uninitialized;
+
       logger.e(e);
     }
   }

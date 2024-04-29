@@ -1,4 +1,5 @@
 import 'package:auth_provider/auth_provider.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -75,6 +76,16 @@ class AuthScreenController extends GetxController {
         // colorText: Colors.white,
       );
       return true;
+    } on DioException catch (e) {
+      print(e);
+      Get.snackbar(
+        'Error',
+        ExceptionService.errorDecoder(e.type),
+        backgroundColor: Colors.red,
+        snackPosition: SnackPosition.BOTTOM,
+        // colorText: Colors.white,
+      );
+      return false;
     } catch (e) {
       print(e);
       Get.snackbar(
@@ -130,40 +141,36 @@ class AuthScreenController extends GetxController {
 
   Future<bool?> onRegisterSubmit(Map<String, dynamic> values,
       void Function(Map<String, String?>) setErrors) async {
-    // print('Register');
-    // _onRegister(values[emailKey], values[passwordKey]);
-    //
-    // if (isError) {
-    //   if (errorMessage.contains("email")) {
-    //     setErrors({emailKey: 'Invalid email'});
-    //   } else if (errorMessage.contains("password")) {
-    //     setErrors({passwordKey: 'Invalid  password'});
-    //   } else {
-    //     setErrors({
-    //       'Email Address': 'Invalid credentials',
-    //       'Password': 'Invalid credentials'
-    //     });
-    //   }
-    //   Get.snackbar(
-    //     'Error',
-    //     errorMessage.value,
-    //     backgroundColor: Colors.red,
-    //     snackPosition: SnackPosition.BOTTOM,
-    //     // colorText: Colors.white,
-    //   );
-    //   values.clear();
-    //   return false;
-    // }
-    // // isLogin.value = true;
-    // Get.offAllNamed(Routes.HOME);
-    // Get.snackbar(
-    //   'Success',
-    //   'Registration Successful',
-    //   backgroundColor: Colors.green,
-    //   snackPosition: SnackPosition.BOTTOM,
-    //   // colorText: Colors.white,
-    // );
-    return true;
+    try {
+      await authController.register(values[emailKey], values[passwordKey]);
+      Get.offAllNamed(Routes.HOME);
+      Get.snackbar(
+        'Success',
+        'Registration Successful',
+        backgroundColor: Colors.green,
+        snackPosition: SnackPosition.BOTTOM,
+        // colorText: Colors.white,
+      );
+      return true;
+    } on DioException catch (e) {
+      Get.snackbar(
+        'Error',
+        ExceptionService.errorDecoder(e.type),
+        backgroundColor: Colors.red,
+        snackPosition: SnackPosition.BOTTOM,
+        // colorText: Colors.white,
+      );
+      return false;
+    } catch (e) {
+      Get.snackbar(
+        'Error',
+        e.toString(),
+        backgroundColor: Colors.red,
+        snackPosition: SnackPosition.BOTTOM,
+        // colorText: Colors.white,
+      );
+      return false;
+    }
   }
 
   void onForgetPassword(String email) {

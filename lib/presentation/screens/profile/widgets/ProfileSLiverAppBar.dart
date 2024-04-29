@@ -1,8 +1,7 @@
 import 'package:auth_provider/auth_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/instance_manager.dart';
-import 'package:get/route_manager.dart';
+import 'package:get/get.dart';
 import 'package:mybuddys/infrastructure/navigation/routes.dart';
 
 class ProfileAppBar extends StatelessWidget {

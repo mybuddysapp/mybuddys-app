@@ -38,7 +38,8 @@
     "not_in_schema": "Champ non dans le schéma autorisé",
     "not_in_type": "Champ non dans le type autorisé",
     "not_in_instance": "Champ non dans l'instance autorisée",
-    "not_in_pattern": "Champ non dans le pattern autorisé"
+    "not_in_pattern": "Champ non dans le pattern autorisé",
+    "invalid_username_or_password": "Nom d'utilisateur ou mot de passe invalide"
   },
   "ask": {
     "existing_page": "La page [%s] existe déjà, voulez-vous l'écraser?",
