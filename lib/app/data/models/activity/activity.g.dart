@@ -12,7 +12,7 @@ _$ActivityImpl _$$ActivityImplFromJson(Map<String, dynamic> json) =>
       name: json['name'] as String,
       description: json['description'] as String?,
       type: json['type'] as String,
-      no_of_players: json['no_of_players'] as int,
+      no_of_players: (json['no_of_players'] as num).toInt(),
     );
 
 Map<String, dynamic> _$$ActivityImplToJson(_$ActivityImpl instance) =>

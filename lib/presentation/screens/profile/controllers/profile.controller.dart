@@ -24,7 +24,7 @@ class ProfileController extends GetxController with StateMixin<Player?> {
   void onReady() {
     super.onReady();
     // You may not need to fetch player list again when the widget is ready
-    getPlayerProfile();
+    // getPlayerProfile();
   }
 
   //method to get current user player porfile
@@ -44,7 +44,7 @@ class ProfileController extends GetxController with StateMixin<Player?> {
   }
 
   void onLogout() {
-    Get.find<AuthAPI>().signOut();
+    Get.find<AuthAPI>().logOut();
     Get.offAllNamed(Routes.ROOT);
   }
 

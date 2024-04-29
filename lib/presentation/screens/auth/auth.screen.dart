@@ -1,10 +1,11 @@
-import 'package:appwrite/appwrite.dart';
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:http/http.dart' as http;
 import 'package:lo_form/lo_form.dart';
-import 'package:mybuddys/infrastructure/navigation/routes.dart';
 import 'package:mybuddys/presentation/components/my_button.dart';
 import 'package:mybuddys/presentation/components/my_sliver_app_bar.dart';
 
@@ -79,11 +80,12 @@ class AuthScreen extends GetView<AuthScreenController> {
                 child: const Text('Google login'),
               ),
             ),
-          )
+          ),
         ],
       ),
     );
   }
+
 
   Widget _loginForm() {
     return LoForm<String>(

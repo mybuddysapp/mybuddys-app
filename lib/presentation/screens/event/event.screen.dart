@@ -1,3 +1,4 @@
+import 'package:auth_provider/auth_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mybuddys/presentation/screens.dart';
@@ -24,7 +25,10 @@ class EventScreen extends GetView<EventController> {
             ),
             ElevatedButton(
               onPressed: () {
-                Get.to(() => ProfileScreen());
+                // Get.to(() => ProfileScreen());
+                var aaa=Get.find<AuthAPI>();
+                aaa.getMe();
+                logger.t(aaa.userEmail);
               },
               child: const Text("Home"),
             ),

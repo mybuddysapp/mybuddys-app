@@ -65,8 +65,7 @@ class AuthScreenController extends GetxController {
   Future<bool> onLoginSubmit(Map<String, dynamic> values,
       void Function(Map<String, String?>) setErrors) async {
     try {
-      await authController.createEmailSession(
-          email: values[emailKey], password: values[passwordKey]);
+      await authController.login(values[emailKey], values[passwordKey]);
       Get.offAllNamed(Routes.HOME);
       Get.snackbar(
         'Success',

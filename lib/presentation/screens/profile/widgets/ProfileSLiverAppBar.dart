@@ -1,17 +1,17 @@
 import 'package:auth_provider/auth_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/instance_manager.dart';
 import 'package:get/route_manager.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mybuddys/infrastructure/navigation/routes.dart';
 
-class ProfileAppBar extends ConsumerWidget {
+class ProfileAppBar extends StatelessWidget {
   final String? avatar;
 
   const ProfileAppBar({super.key, required this.avatar});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return SliverAppBar(
       actions: [
         IconButton(
@@ -37,7 +37,8 @@ class ProfileAppBar extends ConsumerWidget {
           color: Colors.white,
         ),
         onPressed: () {
-          ref.watch(authProvider.notifier).logout();
+          Get.find<AuthAPI>().logOut();
+          Get.offAllNamed(Routes.ROOT);
         },
       ),
       //colors

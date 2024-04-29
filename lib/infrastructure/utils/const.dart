@@ -32,6 +32,8 @@ class Consts {
 
 const unexpectedErrorMessage = 'Unexpected error occurred.';
 
+const API_URL = 'http://192.168.1.202:8080/api/v1';
+
 const formSpacer = SizedBox(width: 16, height: 16);
 
 /// Some padding for all the forms to use

@@ -9,6 +9,8 @@ class HomeController extends GetxController {
   void changeTabIndex(int index) {
     tabIndex.value = index;
 
+
+
     // switch(index) {
     //   case 0:
     //     Get.toNamed(Routes.EVENTS);

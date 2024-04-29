@@ -106,7 +106,6 @@ class _ProfileView extends StatelessWidget {
     required this.player,
   });
 
-  final session = Get.find<AuthAPI>().value;
 
   @override
   Widget build(BuildContext context) {

@@ -25,9 +25,9 @@ class ProfileProvider extends GetConnect {
 
   Future<Player?> getPlayerProfile() async {
     // final client = await ref.getDebouncedDio();
-    final currentUser = Get.find<AuthAPI>().currentUser;
-    debugPrint("----->" + currentUser!.$id);
-    final playerProfileUrl = '$url/player/${currentUser.$id}';
+    final currentUser = Get.find<AuthAPI>();
+    debugPrint("----->" + currentUser.userId!);
+    final playerProfileUrl = '$url/player/${currentUser.userEmail!}';
 
     // final response = await client.get('$API_URL/player/${currentUser.uid}');
 
@@ -41,7 +41,7 @@ class ProfileProvider extends GetConnect {
 
   Future<bool> checkPseudonym(String pseudo) async {
     final response = await post(
-      '$Consts.API_URL/player/pseudonym',
+      '${Consts.API_URL}/player/pseudonym',
       {'pseudonym': pseudo},
     );
     if (response.statusCode == 200 && response.body['isAvailable'] == "true") {
