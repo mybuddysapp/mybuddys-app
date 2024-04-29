@@ -249,6 +249,8 @@ class Auth extends _$Auth {
     await supabase.auth.signOut();
   }
 
+
+
   dispose() {
     _authStateSubscription.cancel();
   }
