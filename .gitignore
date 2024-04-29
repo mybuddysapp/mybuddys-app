@@ -1,4 +1,5 @@
 
+.env
 *.stamp
 *.xml
 /.dart_tool
