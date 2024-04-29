@@ -13,7 +13,7 @@ class Api {
       InterceptorsWrapper(
         onRequest: (options, handler) async {
           if (!options.path.contains('http')) {
-            options.path = API_AUTH_URL + options.path;
+            options.path = AUTH_API_URL + options.path;
           }
           options.headers['Content-Type'] = 'application/json';
           options.headers['Authorization'] =
