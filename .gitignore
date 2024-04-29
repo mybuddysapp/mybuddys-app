@@ -9,3 +9,6 @@ pubspec.lock
 .flutter-plugins-dependencies
 /build
 
+auth_provider/.flutter-plugins
+auth_provider/.flutter-plugins-dependencies
+auth_provider/.flutter-plugins-dependencies
