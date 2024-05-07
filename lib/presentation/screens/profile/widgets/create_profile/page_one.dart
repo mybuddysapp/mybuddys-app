@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mybuddys/infrastructure/utils/const.dart';
 import 'package:mybuddys/presentation/screens/profile/controllers/profile.controller.dart';
-
 import 'package:wolt_modal_sheet/wolt_modal_sheet.dart';
 
 typedef HandlePseudoSubmit = void Function(String pseudonym);
@@ -12,8 +11,8 @@ SliverWoltModalSheetPage page1(
   ValueNotifier<int> pageIndexNotifier,
 ) {
   final textTheme = Theme.of(context).textTheme;
-
-  // Get.put(ProfileController());
+  final controller = Get.find<ProfileController>();
+  final psuedonym = controller.pseudonymController.value;
 
   return SliverWoltModalSheetPage(
     enableDrag: true,
@@ -26,28 +25,29 @@ SliverWoltModalSheetPage page1(
       ),
     ),
     hasSabGradient: true,
-    // stickyActionBar: Padding(
-    //   padding: const EdgeInsets.all(pagePadding),
-    //   child: Column(
-    //     children: [
-    //       // const SizedBox(height: 8),
-    //       isUsernameAvailable
-    //           ? ElevatedButton(
-    //               onPressed: () =>
-    //                   pageIndexNotifier.value = pageIndexNotifier.value + 1,
-    //               child: const SizedBox(
-    //                 height: buttonHeight,
-    //                 width: double.infinity,
-    //                 child: Center(
-    //                   child: Text('Let\'s get started!'),
-    //                 ),
-    //               ),
-    //             )
-    //           : Container()
-    //     ],
-    //   ),
-    // ),
-    topBarTitle: Text('choose_player_psuedonym'.tr, style: textTheme.titleLarge),
+    stickyActionBar: Padding(
+      padding: const EdgeInsets.all(pagePadding),
+      child: Column(
+        children: [
+          // const SizedBox(height: 8),
+          controller.isPseudoAvailable.value
+              ? ElevatedButton(
+                  onPressed: () =>
+                      pageIndexNotifier.value = pageIndexNotifier.value + 1,
+                  child: const SizedBox(
+                    height: buttonHeight,
+                    width: double.infinity,
+                    child: Center(
+                      child: Text('Let\'s get started!'),
+                    ),
+                  ),
+                )
+              : Container()
+        ],
+      ),
+    ),
+    topBarTitle:
+        Text('choose_player_psuedonym'.tr, style: textTheme.titleLarge),
     isTopBarLayerAlwaysVisible: true,
     trailingNavBarWidget: IconButton(
       padding: const EdgeInsets.all(pagePadding),
@@ -87,7 +87,7 @@ SliverWoltModalSheetPage page1(
                 child: TextField(
                   //add a icon to reset the field
 
-                  controller: Get.find<ProfileController>().pseudonymController,
+                  controller: controller.pseudonymController,
                   style: textTheme.bodyText1!.copyWith(
                     color: Colors.black,
                     fontSize: 16,
@@ -97,16 +97,12 @@ SliverWoltModalSheetPage page1(
                         'Try your best pseudonyme here ... ex: TheBadassPlayer',
                   ),
                   scrollPadding: const EdgeInsets.only(bottom: 600),
-                  textInputAction: TextInputAction.done,
+                  textInputAction: TextInputAction.search,
                   onSubmitted: (value) async {
-                    // handlePseudoSubmit(value);
-                    Get.find<ProfileController>().checkPseudonym();
-                    //check if the username is already taken
-                    //if it is, show an error message
+                    controller.handlePseudonymSubmit();
                   },
                 ),
                 // a subit button to check if the username is available
-
               ),
             ],
           ),
@@ -119,9 +115,24 @@ SliverWoltModalSheetPage page1(
             children: [
               const SizedBox(height: 16),
               Obx(
-                () => Get.find<ProfileController>().isPseudoAvailable.value
-                    ? const Text("THis is working",
-                        style: TextStyle(color: Colors.green))
+                () => controller.isPseudoAvailable.value
+                    ? ElevatedButton(
+                        onPressed: () => pageIndexNotifier.value =
+                            pageIndexNotifier.value + 1,
+                        child: const SizedBox(
+                          height: buttonHeight,
+                          width: double.infinity,
+                          child: Center(
+                            child: Text(
+                              'Let\'s get started!',
+                              style: TextStyle(
+                                color: Colors.green,
+                                fontSize: 16,
+                              ),
+                            ),
+                          ),
+                        ),
+                      )
                     : const Text(
                         'No it is not working',
                         style: TextStyle(color: Colors.red),
@@ -131,7 +142,7 @@ SliverWoltModalSheetPage page1(
           ),
         ),
       ),
-      const SliverPadding(padding: EdgeInsets.only(bottom: 50)),
+      // const SliverPadding(padding: EdgeInsets.only(bottom: 50)),
     ],
   );
 }

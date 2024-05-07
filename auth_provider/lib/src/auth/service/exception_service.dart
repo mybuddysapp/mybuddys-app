@@ -14,7 +14,7 @@ class ExceptionService {
       case DioExceptionType.receiveTimeout:
         return 'Receive timeout';
       case DioExceptionType.badResponse:
-        return 'Response error';
+        return 'No account found with that email';
       case DioExceptionType.cancel:
         return 'Request cancelled';
       case DioExceptionType.unknown:

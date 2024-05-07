@@ -1,4 +1,3 @@
-import 'package:auth_provider/auth_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -7,22 +6,16 @@ import 'package:mybuddys/infrastructure/navigation/routes.dart';
 import 'package:mybuddys/presentation/components/my_sliver_app_bar.dart';
 import 'package:mybuddys/presentation/screens/profile/widgets/create_profile/create_profile_sliver.dart';
 
-// import 'package:appwrite/models.dart' as models;
-
 import 'controllers/profile.controller.dart';
 
 class ProfileScreen extends GetView<ProfileController> {
   const ProfileScreen({super.key});
-
-  // @override
-  // ProfileController controller = Get.put(ProfileController(), permanent: false);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: CustomScrollView(
         slivers: [
-          // ProfileAppBar(avatar: null),
           MySliverAppBar(
             title: 'profile'.tr,
             avatarIcon: Icons.person_2,
@@ -42,7 +35,6 @@ class ProfileScreen extends GetView<ProfileController> {
                 Icons.logout,
               ),
               onPressed: () {
-
                 controller.onLogout();
               },
             ),
@@ -102,10 +94,9 @@ class CreatePlayerProfileWidget extends StatelessWidget {
 class _ProfileView extends StatelessWidget {
   final Player? player;
 
-  _ProfileView({
+  const _ProfileView({
     required this.player,
   });
-
 
   @override
   Widget build(BuildContext context) {
@@ -126,8 +117,7 @@ class _ProfileView extends StatelessWidget {
           Text('Name: ${player?.firstname} ${player?.lastname}'),
           Text('DOB: ${player?.dob}'),
           //AGE from DOB
-          Text(
-              'Age: ${DateTime.now().year - int.parse(player!.dob.substring(0, 4))}'),
+          // Text('Age: ${DateTime.now().year - int.parse(player!.dob.substring(0, 4))}'),
           Text('Bio: ${player?.bio}'),
           Text('Phone: ${player?.phone ?? 'N/A'}'),
           Text('Address: ${player?.address}'),

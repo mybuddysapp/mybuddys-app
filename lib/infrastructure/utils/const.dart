@@ -8,31 +8,16 @@ class Consts {
     await dotenv.load(fileName: ".env");
   }
 
-  // String HOST = 'http://192.168.1.202';
-
-//  String HOST = 'http://localhost';
-//   String URL = '$HOST:8080';
-
-  // String API_URL = '$URL/api/v1';
 
   //get variables from the .env file
   static String API_URL =
       dotenv.env['API_BASE_URL'] ?? 'http://localhost:8080/api/v1';
-  static String SUPABASE_URL =
-      dotenv.env['API_AUTH_URL'] ?? 'http://localhost:8000';
-  static String APPWRITE_URL =
-      dotenv.env['API_APPWRITE_URL'] ?? 'http://localhost/v1';
 
-// const String API_URL = 'http://192.168.1.134:8080/api/v1';
-
-//SUPABASE
-  static const String SUPABASE_ANON_KEY =
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyAgCiAgICAicm9sZSI6ICJhbm9uIiwKICAgICJpc3MiOiAic3VwYWJhc2UtZGVtbyIsCiAgICAiaWF0IjogMTY0MTc2OTIwMCwKICAgICJleHAiOiAxNzk5NTM1NjAwCn0.dc_X5iR_VP_qT0zsiyj_I_OZ2T9FtRU2BBNWN8Bu4GE';
 }
 
 const unexpectedErrorMessage = 'Unexpected error occurred.';
 
-const API_URL = 'http://192.168.1.202:8080/api/v1';
+const API_URL = 'http://192.168.1.134:8080/api/v1';
 
 const formSpacer = SizedBox(width: 16, height: 16);
 

@@ -1,4 +1,3 @@
-
 import 'package:get/get.dart';
 
 class AuthException implements Exception {
@@ -7,13 +6,17 @@ class AuthException implements Exception {
   AuthException(this.message);
 
   @override
-  String toString() => 'AuthException: $message';
+  String toString() => 'Error: $message';
+}
+
+class EmailAuthException extends AuthException {
+  EmailAuthException(super.message);
 }
 
 class CredentialException extends AuthException {
   CredentialException() : super("invalid_username_or_password".tr);
 }
 
-class PasswordNotValidException extends AuthException {
-  PasswordNotValidException() : super("incorrect_password".tr);
+class PasswordAuthException extends AuthException {
+  PasswordAuthException(super.message);
 }

@@ -18,17 +18,6 @@ class AuthScreen extends GetView<AuthScreenController> {
 
   @override
   Widget build(BuildContext context) {
-    // var client = Account(Client()
-    //     .setEndpoint('http://192.168.1.202:80/v1')
-    //     .setProject('6626d7200023fc1e29fa')
-    //     .setSelfSigned(status: true));
-    //
-    // client.get().then((value) => {print("===============>"), print(value.email)});
-
-    // print("checking in the auth screen if the user is logged in");
-    // if (controller.isLoggedIn) {
-    //   Get.offAllNamed(Routes.HOME);
-    // }
     return Scaffold(
       body: CustomScrollView(
         key: UniqueKey(),

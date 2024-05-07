@@ -1,18 +1,13 @@
-import 'package:auth_provider/auth_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-
-// Add this for SliverGrid
-import 'package:flutter/rendering.dart'; // Import this for SliverGrid
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:get/get.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:mybuddys/infrastructure/utils/const.dart';
+import 'package:mybuddys/presentation/screens/profile/controllers/create_profile.controller.dart';
 import 'package:mybuddys/presentation/screens/profile/widgets/create_profile/page_one.dart';
 import 'package:mybuddys/presentation/screens/profile/widgets/create_profile/page_two.dart';
-
 import 'package:wolt_modal_sheet/wolt_modal_sheet.dart';
 
-class CreateProfileSliver extends StatelessWidget {
+class CreateProfileSliver extends GetView<CreateProfileController> {
   const CreateProfileSliver({super.key});
 
   @override
@@ -25,126 +20,124 @@ class CreateProfileSliver extends StatelessWidget {
 
     // final isPseudoAvailable = ValueNotifier(false);
 
-    final isPseudoAvailable = useState<Future<bool>?>(Future.value(false));
+    // final isPseudoAvailable = useState<Future<bool>?>(Future.value(false));
     // We listen to the pending operation, to update the UI accordingly.
-    final snapshot = useFuture(isPseudoAvailable.value);
+    // final snapshot = useFuture(isPseudoAvailable.value);
 
     var isOk = false.obs;
 
-    return SliverFillRemaining(
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              alignment: Alignment.center,
-              padding: const EdgeInsets.all(16),
-              child: RichText(
-                textAlign: TextAlign.center,
-                text: TextSpan(
-                  style: textTheme0.titleLarge,
-                  children: const [
-                    TextSpan(
-                      text: 'You have not yet created your ',
-                    ),
-                    TextSpan(
-                      text: 'Player',
-                      style: TextStyle(
-                          color: Colors.red), // Apply red color to "Player"
-                    ),
-                    TextSpan(
-                      text: ' profile',
-                    ),
-                  ],
-                ),
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            alignment: Alignment.center,
+            padding: const EdgeInsets.all(16),
+            child: RichText(
+              textAlign: TextAlign.center,
+              text: TextSpan(
+                style: textTheme0.titleLarge,
+                children: const [
+                  TextSpan(
+                    text: 'You have not yet created your ',
+                  ),
+                  TextSpan(
+                    text: 'Player',
+                    style: TextStyle(
+                        color: Colors.red), // Apply red color to "Player"
+                  ),
+                  TextSpan(
+                    text: ' profile',
+                  ),
+                ],
               ),
             ),
-            ElevatedButton(
-              onPressed: () {
-                WoltModalSheet.show(
-                  context: context,
-                  pageIndexNotifier: pageIndexNotifier,
-                  pageListBuilder: (modalSheetContext) {
-                    return [
-                      page1(
-                        modalSheetContext, pageIndexNotifier,
-                        //   (String pseudonym) async {
-                        // final provider = ref
-                        //     .read(playerProfileProvider.notifier)
-                        //     .checkUsername(pseudonym);
-                        // isPseudoAvailable.value = provider;
-                        // debugPrint('isAvailable: $isPseudoAvailable');
-                        // if (pseudonym == 'test') {
-                        //   isOk.value = true;
-                        // } else {
-                        //   isOk.value = false;
-                        // }
-                        // }, isOk,
-                      ),
-                      page2(
-                        modalSheetContext,
-                        pageIndexNotifier,
-                      ),
-                    ];
-                  },
-                  modalTypeBuilder: (context) {
-                    final size = MediaQuery.of(context).size.width;
-                    return size < pageBreakpoint
-                        ? WoltModalType.bottomSheet
-                        : WoltModalType.dialog;
-                  },
-                  onModalDismissedWithBarrierTap: () {
-                    debugPrint('Closed modal sheet with barrier tap');
-                    Navigator.of(context).pop();
-                    pageIndexNotifier.value = 0;
-                  },
-                );
-              },
-              child: SizedBox(
-                height: buttonHeight,
-                width: buttonWidth,
-                child: Center(
-                  child: Text(
-                    'create player profile'.tr,
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
+          ),
+          ElevatedButton(
+            onPressed: () {
+              WoltModalSheet.show(
+                context: context,
+                pageIndexNotifier: pageIndexNotifier,
+                pageListBuilder: (modalSheetContext) {
+                  return [
+                    page1(
+                      modalSheetContext, pageIndexNotifier,
+                      //   (String pseudonym) async {
+                      // final provider = ref
+                      //     .read(playerProfileProvider.notifier)
+                      //     .checkUsername(pseudonym);
+                      // isPseudoAvailable.value = provider;
+                      // debugPrint('isAvailable: $isPseudoAvailable');
+                      // if (pseudonym == 'test') {
+                      //   isOk.value = true;
+                      // } else {
+                      //   isOk.value = false;
+                      // }
+                      // }, isOk,
                     ),
+                    page2(
+                      modalSheetContext,
+                      pageIndexNotifier,
+                    ),
+                  ];
+                },
+                modalTypeBuilder: (context) {
+                  final size = MediaQuery.of(context).size.width;
+                  return size < pageBreakpoint
+                      ? WoltModalType.bottomSheet
+                      : WoltModalType.dialog;
+                },
+                onModalDismissedWithBarrierTap: () {
+                  debugPrint('Closed modal sheet with barrier tap');
+                  Navigator.of(context).pop();
+                  pageIndexNotifier.value = 0;
+                },
+              );
+            },
+            child: SizedBox(
+              height: buttonHeight,
+              width: buttonWidth,
+              child: Center(
+                child: Text(
+                  'create player profile'.tr,
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
             ),
-            ElevatedButton(
-              onPressed: () {
-                showCupertinoModalBottomSheet(
-                  bounce: true,
-                  expand: true,
-                  enableDrag: true,
-                  context: context,
-                  builder: (context) => Scaffold(
-                    body: Container(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          children: [
-                            Text('This is a modal efzerngo sheet'),
-                            ElevatedButton(
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                              child: const Text("close"),
-                            ),
-                          ],
-                        ),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              showCupertinoModalBottomSheet(
+                bounce: true,
+                expand: true,
+                enableDrag: true,
+                context: context,
+                builder: (context) => Scaffold(
+                  body: Container(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+                          Text('This is a modal efzerngo sheet'),
+                          ElevatedButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: const Text("close"),
+                          ),
+                        ],
                       ),
                     ),
                   ),
-                );
-              },
-              child: const Text("modal sheet with text field"),
-            ),
-          ],
-        ),
+                ),
+              );
+            },
+            child: const Text("modal sheet with text field"),
+          ),
+        ],
       ),
     );
   }

@@ -13,7 +13,6 @@ class AuthScreenController extends GetxController {
   var loginFormKey = UniqueKey();
   var registerFormKey = UniqueKey();
 
-  // var isLoggedIn = Get.find<AppwriteAuthProvider>().isAuthenticated.value;
 
   var isLogin = true.obs;
 
@@ -21,14 +20,6 @@ class AuthScreenController extends GetxController {
 
   var title = 'login'.tr.obs;
 
-  // final emailController = TextEditingController();
-  // final passwordController = TextEditingController();
-
-  // String get email => emailController.text.trim();
-  //
-  // String get password => passwordController.text.trim();
-
-  // var authController = Get.find<AppwriteAuthProvider>();
   var authController = Get.find<AuthAPI>();
 
   bool get isError => errorMessage.value.isNotEmpty;
@@ -54,14 +45,6 @@ class AuthScreenController extends GetxController {
     title.value = isLogin.value ? 'login'.tr : 'register'.tr;
   }
 
-  // void _onLogin(String email, String password) async {
-  //   print('Login');
-  //   // var error = await authController.login(email, password);
-  //   if (error != null) {
-  //     print(error);
-  //     errorMessage.value = error;
-  //   }
-  // }
 
   Future<bool> onLoginSubmit(Map<String, dynamic> values,
       void Function(Map<String, String?>) setErrors) async {
@@ -97,47 +80,7 @@ class AuthScreenController extends GetxController {
       );
       return false;
     }
-
-    // _onLogin(values[emailKey], values[passwordKey]);
-    // if (isError) {
-    //   if (errorMessage.contains("email")) {
-    //     setErrors({emailKey: 'Invalid email'});
-    //   } else if (errorMessage.contains("password")) {
-    //     setErrors({passwordKey: 'Invalid  password'});
-    //   } else {
-    //     setErrors({
-    //       'Email Address': 'Invalid login credentials',
-    //       'Password': 'Invalid login credentials'
-    //     });
-    //   }
-    //   Get.snackbar(
-    //     'Error',
-    //     errorMessage.value,
-    //     backgroundColor: Colors.red,
-    //     snackPosition: SnackPosition.BOTTOM,
-    //     // colorText: Colors.white,
-    //   );
-    //   values.clear();
-    //   return false;
-    // }
-    // Get.snackbar(
-    //   'Success',
-    //   'Login Successful',
-    //   backgroundColor: Colors.green,
-    //   snackPosition: SnackPosition.BOTTOM,
-    //   // colorText: Colors.white,
-    // );
-    // Get.offAllNamed(Routes.HOME);
-    // return true;
   }
-
-  // void _onRegister(String email, String password) async {
-  //   var error = await authController.register(email, password);
-  //   if (error != null) {
-  //     print(error);
-  //     errorMessage.value = error;
-  //   }
-  // }
 
   Future<bool?> onRegisterSubmit(Map<String, dynamic> values,
       void Function(Map<String, String?>) setErrors) async {
@@ -152,6 +95,21 @@ class AuthScreenController extends GetxController {
         // colorText: Colors.white,
       );
       return true;
+    } on AuthException catch (e) {
+
+      // switch(e){
+      //   case :
+      //     setErrors({emailKey: 'Email already exists'});
+      //     break;
+      // }
+      Get.snackbar(
+        'Error',
+        e.message,
+        backgroundColor: Colors.red,
+        snackPosition: SnackPosition.BOTTOM,
+        // colorText: Colors.white,
+      );
+      return false;
     } on DioException catch (e) {
       Get.snackbar(
         'Error',
@@ -161,7 +119,10 @@ class AuthScreenController extends GetxController {
         // colorText: Colors.white,
       );
       return false;
+
     } catch (e) {
+
+
       Get.snackbar(
         'Error',
         e.toString(),

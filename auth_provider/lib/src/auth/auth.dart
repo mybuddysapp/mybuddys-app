@@ -56,14 +56,9 @@ class AuthAPI extends GetxService {
   Future<void> logOut() async {
     await _authService.logout();
     _status.value = AuthStatus.unauthenticated;
-    // _isLogged.value = false;
-    // _userId.value = '';
-    // _userEmail.value = '';
-    // _tokenManager.removeTokens();
   }
 
   Future<void> login(String email, String password) async {
-    // try {
     final tokenRes =
         await _authService.login({'email': email, 'password': password});
     final token = tokenRes.access;
@@ -71,26 +66,31 @@ class AuthAPI extends GetxService {
     await _tokenManager.saveToken(token);
     await _tokenManager.saveRefreshToken(refreshToken);
 
-    logger.d(tokenRes.access);
-    logger.d(tokenRes.refresh);
     _status.value = AuthStatus.authenticated;
   }
 
   Future<void> register(String email, String password) async {
     try {
-      final user =
           await _authService.register({'email': email, 'password': password});
     } on DioException catch (e) {
       if (e.response?.statusCode == 400) {
         var errors = RegisterResponseErrorModel.fromJson(e.response?.data);
+
         String errorMessages = '';
-        errors.email?.forEach((element) {
-          errorMessages += '$element\n';
-        });
-        errors.password?.forEach((element) {
-          errorMessages += '$element\n';
-        });
-        throw AuthException(errorMessages);
+        if (errors.email != null) {
+          errors.email?.forEach((element) {
+            errorMessages += '$element\n';
+          });
+
+          throw EmailAuthException(errorMessages);
+        }
+        if (errors.password != null) {
+          errors.password?.forEach((element) {
+            errorMessages += '$element\n';
+          });
+
+          throw PasswordAuthException(errorMessages);
+        }
       }
       rethrow;
     }

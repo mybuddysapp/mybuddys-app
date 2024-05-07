@@ -52,6 +52,7 @@ dependencies:
   logger: ^2.2.0
   retrofit_generator: ^8.1.0
   shared_preferences: ^2.2.3
+  dartz: ^0.10.1
 
 
 dev_dependencies:
@@ -76,6 +77,5 @@ flutter:
     - public/assets/fonts/
     - public/assets/images/
     - public/assets/app_icon/
-    - lang/
     - .env
   uses-material-design: true
