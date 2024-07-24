@@ -25,7 +25,6 @@ abstract class AuthService {
   @POST('/users/activation/')
   Future<dynamic> resendActivationMail(@Body() Map<String, dynamic> body);
 
-
   /**
    * Change email
    * {

@@ -27,6 +27,7 @@ mixin _$Player {
   String get dob => throw _privateConstructorUsedError;
   DateTime get created_at => throw _privateConstructorUsedError;
   DateTime get modified_at => throw _privateConstructorUsedError;
+  String get gender => throw _privateConstructorUsedError;
   String? get bio => throw _privateConstructorUsedError;
   String? get phone => throw _privateConstructorUsedError;
   String? get address => throw _privateConstructorUsedError;
@@ -54,6 +55,7 @@ abstract class $PlayerCopyWith<$Res> {
       String dob,
       DateTime created_at,
       DateTime modified_at,
+      String gender,
       String? bio,
       String? phone,
       String? address,
@@ -84,6 +86,7 @@ class _$PlayerCopyWithImpl<$Res, $Val extends Player>
     Object? dob = null,
     Object? created_at = null,
     Object? modified_at = null,
+    Object? gender = null,
     Object? bio = freezed,
     Object? phone = freezed,
     Object? address = freezed,
@@ -122,6 +125,10 @@ class _$PlayerCopyWithImpl<$Res, $Val extends Player>
           ? _value.modified_at
           : modified_at // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      gender: null == gender
+          ? _value.gender
+          : gender // ignore: cast_nullable_to_non_nullable
+              as String,
       bio: freezed == bio
           ? _value.bio
           : bio // ignore: cast_nullable_to_non_nullable
@@ -173,6 +180,7 @@ abstract class _$$PlayerImplCopyWith<$Res> implements $PlayerCopyWith<$Res> {
       String dob,
       DateTime created_at,
       DateTime modified_at,
+      String gender,
       String? bio,
       String? phone,
       String? address,
@@ -201,6 +209,7 @@ class __$$PlayerImplCopyWithImpl<$Res>
     Object? dob = null,
     Object? created_at = null,
     Object? modified_at = null,
+    Object? gender = null,
     Object? bio = freezed,
     Object? phone = freezed,
     Object? address = freezed,
@@ -239,6 +248,10 @@ class __$$PlayerImplCopyWithImpl<$Res>
           ? _value.modified_at
           : modified_at // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      gender: null == gender
+          ? _value.gender
+          : gender // ignore: cast_nullable_to_non_nullable
+              as String,
       bio: freezed == bio
           ? _value.bio
           : bio // ignore: cast_nullable_to_non_nullable
@@ -286,6 +299,7 @@ class _$PlayerImpl implements _Player {
       required this.dob,
       required this.created_at,
       required this.modified_at,
+      required this.gender,
       this.bio,
       this.phone,
       this.address,
@@ -313,6 +327,8 @@ class _$PlayerImpl implements _Player {
   @override
   final DateTime modified_at;
   @override
+  final String gender;
+  @override
   final String? bio;
   @override
   final String? phone;
@@ -331,7 +347,7 @@ class _$PlayerImpl implements _Player {
 
   @override
   String toString() {
-    return 'Player(id: $id, firstname: $firstname, lastname: $lastname, pseudonym: $pseudonym, dob: $dob, created_at: $created_at, modified_at: $modified_at, bio: $bio, phone: $phone, address: $address, banned_until: $banned_until, banned_reason: $banned_reason, banned_by: $banned_by, available: $available, avatar: $avatar)';
+    return 'Player(id: $id, firstname: $firstname, lastname: $lastname, pseudonym: $pseudonym, dob: $dob, created_at: $created_at, modified_at: $modified_at, gender: $gender, bio: $bio, phone: $phone, address: $address, banned_until: $banned_until, banned_reason: $banned_reason, banned_by: $banned_by, available: $available, avatar: $avatar)';
   }
 
   @override
@@ -351,6 +367,7 @@ class _$PlayerImpl implements _Player {
                 other.created_at == created_at) &&
             (identical(other.modified_at, modified_at) ||
                 other.modified_at == modified_at) &&
+            (identical(other.gender, gender) || other.gender == gender) &&
             (identical(other.bio, bio) || other.bio == bio) &&
             (identical(other.phone, phone) || other.phone == phone) &&
             (identical(other.address, address) || other.address == address) &&
@@ -376,6 +393,7 @@ class _$PlayerImpl implements _Player {
       dob,
       created_at,
       modified_at,
+      gender,
       bio,
       phone,
       address,
@@ -408,6 +426,7 @@ abstract class _Player implements Player {
       required final String dob,
       required final DateTime created_at,
       required final DateTime modified_at,
+      required final String gender,
       final String? bio,
       final String? phone,
       final String? address,
@@ -433,6 +452,8 @@ abstract class _Player implements Player {
   DateTime get created_at;
   @override
   DateTime get modified_at;
+  @override
+  String get gender;
   @override
   String? get bio;
   @override

@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 
 import 'controllers/teams.controller.dart';
 
 class TeamsScreen extends GetView<TeamsController> {
-  const TeamsScreen({Key? key}) : super(key: key);
+  TeamsScreen({super.key}) {
+    Get.lazyPut(() => TeamsController());
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -13,9 +15,9 @@ class TeamsScreen extends GetView<TeamsController> {
         title: const Text('TeamsScreen'),
         centerTitle: true,
       ),
-      body: const Center(
+      body: Center(
         child: Text(
-          'TeamsScreen is working',
+          'TeamsScreen is working' + controller.toString(),
           style: TextStyle(fontSize: 20),
         ),
       ),

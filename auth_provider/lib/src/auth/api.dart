@@ -1,5 +1,4 @@
 import 'package:auth_provider/auth_provider.dart';
-import 'package:auth_provider/src/auth/service/exception_service.dart';
 import 'package:auth_provider/src/auth/token_manager.dart';
 import 'package:dio/dio.dart';
 
@@ -33,6 +32,10 @@ class Api {
                 return handler.resolve(await _retry(error.requestOptions));
               }
             }
+          }
+          if (error.response?.statusCode == 401) {
+            tokenManager.removeTokens();
+            return handler.reject(error);
           }
           logger.e(error);
           return handler.next(error);

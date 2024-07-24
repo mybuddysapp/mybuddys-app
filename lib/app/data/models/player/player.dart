@@ -1,6 +1,3 @@
-import 'dart:typed_data';
-
-import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'player.g.dart';
@@ -17,6 +14,7 @@ class Player with _$Player {
     required String dob,
     required DateTime created_at,
     required DateTime modified_at,
+    required String gender,
     String? bio,
     String? phone,
     String? address,

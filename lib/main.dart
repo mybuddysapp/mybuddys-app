@@ -82,7 +82,7 @@ class Main extends StatelessWidget {
     //         : print("Unauthenticated");
 
     return GetMaterialApp(
-      key: UniqueKey(),
+      // key: UniqueKey(),
       title: 'MyBuddys',
       debugShowCheckedModeBanner: false,
       // showSemanticsDebugger: true,

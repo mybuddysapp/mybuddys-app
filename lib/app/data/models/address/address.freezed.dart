@@ -20,12 +20,11 @@ Address _$AddressFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Address {
-  String get id => throw _privateConstructorUsedError;
-  String get number => throw _privateConstructorUsedError;
-  String get street => throw _privateConstructorUsedError;
-  String get city => throw _privateConstructorUsedError;
-  String? get state => throw _privateConstructorUsedError;
-  String get zip => throw _privateConstructorUsedError;
+  String get id =>
+      throw _privateConstructorUsedError; // required String number,
+// required String street,
+  String get city => throw _privateConstructorUsedError; // String? state,
+// required String zip,
   String get country => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -38,14 +37,7 @@ abstract class $AddressCopyWith<$Res> {
   factory $AddressCopyWith(Address value, $Res Function(Address) then) =
       _$AddressCopyWithImpl<$Res, Address>;
   @useResult
-  $Res call(
-      {String id,
-      String number,
-      String street,
-      String city,
-      String? state,
-      String zip,
-      String country});
+  $Res call({String id, String city, String country});
 }
 
 /// @nodoc
@@ -62,11 +54,7 @@ class _$AddressCopyWithImpl<$Res, $Val extends Address>
   @override
   $Res call({
     Object? id = null,
-    Object? number = null,
-    Object? street = null,
     Object? city = null,
-    Object? state = freezed,
-    Object? zip = null,
     Object? country = null,
   }) {
     return _then(_value.copyWith(
@@ -74,25 +62,9 @@ class _$AddressCopyWithImpl<$Res, $Val extends Address>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      number: null == number
-          ? _value.number
-          : number // ignore: cast_nullable_to_non_nullable
-              as String,
-      street: null == street
-          ? _value.street
-          : street // ignore: cast_nullable_to_non_nullable
-              as String,
       city: null == city
           ? _value.city
           : city // ignore: cast_nullable_to_non_nullable
-              as String,
-      state: freezed == state
-          ? _value.state
-          : state // ignore: cast_nullable_to_non_nullable
-              as String?,
-      zip: null == zip
-          ? _value.zip
-          : zip // ignore: cast_nullable_to_non_nullable
               as String,
       country: null == country
           ? _value.country
@@ -109,14 +81,7 @@ abstract class _$$AddressImplCopyWith<$Res> implements $AddressCopyWith<$Res> {
       __$$AddressImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String id,
-      String number,
-      String street,
-      String city,
-      String? state,
-      String zip,
-      String country});
+  $Res call({String id, String city, String country});
 }
 
 /// @nodoc
@@ -131,11 +96,7 @@ class __$$AddressImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? number = null,
-    Object? street = null,
     Object? city = null,
-    Object? state = freezed,
-    Object? zip = null,
     Object? country = null,
   }) {
     return _then(_$AddressImpl(
@@ -143,25 +104,9 @@ class __$$AddressImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      number: null == number
-          ? _value.number
-          : number // ignore: cast_nullable_to_non_nullable
-              as String,
-      street: null == street
-          ? _value.street
-          : street // ignore: cast_nullable_to_non_nullable
-              as String,
       city: null == city
           ? _value.city
           : city // ignore: cast_nullable_to_non_nullable
-              as String,
-      state: freezed == state
-          ? _value.state
-          : state // ignore: cast_nullable_to_non_nullable
-              as String?,
-      zip: null == zip
-          ? _value.zip
-          : zip // ignore: cast_nullable_to_non_nullable
               as String,
       country: null == country
           ? _value.country
@@ -174,36 +119,25 @@ class __$$AddressImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$AddressImpl with DiagnosticableTreeMixin implements _Address {
-  _$AddressImpl(
-      {required this.id,
-      required this.number,
-      required this.street,
-      required this.city,
-      this.state,
-      required this.zip,
-      required this.country});
+  _$AddressImpl({required this.id, required this.city, required this.country});
 
   factory _$AddressImpl.fromJson(Map<String, dynamic> json) =>
       _$$AddressImplFromJson(json);
 
   @override
   final String id;
-  @override
-  final String number;
-  @override
-  final String street;
+// required String number,
+// required String street,
   @override
   final String city;
-  @override
-  final String? state;
-  @override
-  final String zip;
+// String? state,
+// required String zip,
   @override
   final String country;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Address(id: $id, number: $number, street: $street, city: $city, state: $state, zip: $zip, country: $country)';
+    return 'Address(id: $id, city: $city, country: $country)';
   }
 
   @override
@@ -212,11 +146,7 @@ class _$AddressImpl with DiagnosticableTreeMixin implements _Address {
     properties
       ..add(DiagnosticsProperty('type', 'Address'))
       ..add(DiagnosticsProperty('id', id))
-      ..add(DiagnosticsProperty('number', number))
-      ..add(DiagnosticsProperty('street', street))
       ..add(DiagnosticsProperty('city', city))
-      ..add(DiagnosticsProperty('state', state))
-      ..add(DiagnosticsProperty('zip', zip))
       ..add(DiagnosticsProperty('country', country));
   }
 
@@ -226,18 +156,13 @@ class _$AddressImpl with DiagnosticableTreeMixin implements _Address {
         (other.runtimeType == runtimeType &&
             other is _$AddressImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.number, number) || other.number == number) &&
-            (identical(other.street, street) || other.street == street) &&
             (identical(other.city, city) || other.city == city) &&
-            (identical(other.state, state) || other.state == state) &&
-            (identical(other.zip, zip) || other.zip == zip) &&
             (identical(other.country, country) || other.country == country));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, number, street, city, state, zip, country);
+  int get hashCode => Object.hash(runtimeType, id, city, country);
 
   @JsonKey(ignore: true)
   @override
@@ -256,28 +181,18 @@ class _$AddressImpl with DiagnosticableTreeMixin implements _Address {
 abstract class _Address implements Address {
   factory _Address(
       {required final String id,
-      required final String number,
-      required final String street,
       required final String city,
-      final String? state,
-      required final String zip,
       required final String country}) = _$AddressImpl;
 
   factory _Address.fromJson(Map<String, dynamic> json) = _$AddressImpl.fromJson;
 
   @override
   String get id;
-  @override
-  String get number;
-  @override
-  String get street;
-  @override
+  @override // required String number,
+// required String street,
   String get city;
-  @override
-  String? get state;
-  @override
-  String get zip;
-  @override
+  @override // String? state,
+// required String zip,
   String get country;
   @override
   @JsonKey(ignore: true)

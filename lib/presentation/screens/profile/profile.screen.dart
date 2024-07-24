@@ -9,87 +9,95 @@ import 'package:mybuddys/presentation/screens/profile/widgets/create_profile/cre
 import 'controllers/profile.controller.dart';
 
 class ProfileScreen extends GetView<ProfileController> {
-  const ProfileScreen({super.key});
+  ProfileScreen({super.key}) {
+    Get.lazyPut(() => ProfileController());
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: CustomScrollView(
-        slivers: [
-          MySliverAppBar(
-            title: 'profile'.tr,
-            avatarIcon: Icons.person_2,
-            rightIconWidget: IconButton(
-              icon: const Icon(
-                CupertinoIcons.settings,
-                color: Colors.white,
+      body: RefreshIndicator(
+        onRefresh: () async {
+          controller.getPlayerProfile();
+        },
+        child: CustomScrollView(
+          slivers: [
+            MySliverAppBar(
+              title: 'profile'.tr,
+              avatarIcon: Icons.person_2,
+              rightIconWidget: IconButton(
+                icon: const Icon(
+                  CupertinoIcons.settings,
+                  color: Colors.white,
+                ),
+                onPressed: () {
+                  // context.goNamed(app_route.settings.name);
+                  Get.toNamed(Routes.SETTINGS);
+                },
               ),
-              onPressed: () {
-                // context.goNamed(app_route.settings.name);
-                Get.toNamed(Routes.SETTINGS);
-              },
+              leftIconWidget: IconButton(
+                style: Get.theme.iconButtonTheme.style,
+                icon: const Icon(
+                  Icons.logout,
+                ),
+                onPressed: () {
+                  controller.onLogout();
+                },
+              ),
             ),
-            leftIconWidget: IconButton(
-              style: Get.theme.iconButtonTheme.style,
-              icon: const Icon(
-                Icons.logout,
-              ),
-              onPressed: () {
-                controller.onLogout();
-              },
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: controller.obx(
-              (data) {
-                // if (data != null) {
-                return _ProfileView(player: data);
-                // } else {
-                //   return Center(
-                //     child: Text('Profile not found'),
-                //   );
-                // }
-              },
-              onLoading: const Center(
-                child: CircularProgressIndicator(),
-              ),
-              onEmpty: const CreateProfileSliver(),
-              onError: (error) => Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text('Error: $error'),
-                    ElevatedButton(
-                      onPressed: () => {},
-                      // ref.refresh(playerProfileProvider.notifier),
-                      child: Text('try_again'.tr),
-                    ),
-                    // MyModalSheet(),
-                  ],
+            SliverToBoxAdapter(
+              child: controller.obx(
+                (data) {
+                  // if (data != null) {
+                  return _ProfileView(player: data);
+                  // } else {
+                  //   return Center(
+                  //     child: Text('Profile not found'),
+                  //   );
+                  // }
+                },
+                onLoading: const Center(
+                  child: CircularProgressIndicator(),
+                ),
+                onEmpty: const CreateProfileSliver(),
+                onError: (error) => Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('Error: $error'),
+                      ElevatedButton(
+                        onPressed: () => {
+                          controller.getPlayerProfile(),
+                        },
+                        child: Text('try_again'.tr),
+                      ),
+                      // MyModalSheet(),
+                    ],
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
 }
 
-class CreatePlayerProfileWidget extends StatelessWidget {
-  const CreatePlayerProfileWidget({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const CustomScrollView(
-      slivers: [
-        SliverToBoxAdapter(
-          child: CreateProfileSliver(),
-        ),
-      ],
-    );
-  }
-}
+// class CreatePlayerProfileWidget extends StatelessWidget {
+//   const CreatePlayerProfileWidget({super.key});
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return const CustomScrollView(
+//       slivers: [
+//         SliverToBoxAdapter(
+//           child: CreateProfileSliver(),
+//         ),
+//       ],
+//     );
+//   }
+// }
 
 class _ProfileView extends StatelessWidget {
   final Player? player;

@@ -16,13 +16,17 @@ enum AuthStatus {
   notFound,
 }
 
+/**
+ * AuthAPI class
+ *
+ */
 class AuthAPI extends GetxService {
-  // final _isLogged = false.obs;
   late final Rx<AuthStatus> _status = AuthStatus.uninitialized.obs;
 
-  // final _api = Api();
   final _tokenManager = TokenManager();
-  final _authService = AuthService(Api().api);
+
+  // late final AuthService _authService;
+  final AuthService _authService = AuthService(Api().api);
 
   final _userId = ''.obs;
   final _userEmail = ''.obs;
@@ -34,8 +38,30 @@ class AuthAPI extends GetxService {
   @override
   void onInit() {
     super.onInit();
+    // _initialize();
+    //add a listenr to the _userId, if its null then the auth is unauthorized
+    _userId.listen((userId) {
+      if (userId.isEmpty) {
+        _status.value = AuthStatus.unauthenticated;
+      } else {
+        _status.value = AuthStatus.authenticated;
+      }
+    });
+  }
+
+  @override
+  void onReady() {
+    super.onReady();
     _init();
   }
+
+  // Future<void> _initialize() async {
+  //   // final baseUrl = Platform.environment['API_AUTH_URL'];
+  //   await dotenv.load(fileName: ".env");
+  //   final baseUrl = dotenv.env['API_AUTH_URL'] ?? null;
+  //   assert(baseUrl == null, 'API_URL is not set in the environment file');
+  //   _authService = AuthService(Api().api, baseUrl: baseUrl!);
+  // }
 
   AuthAPI() {
     _status.listen((isLogged) async {
@@ -54,8 +80,8 @@ class AuthAPI extends GetxService {
   AuthStatus get status => _status.value;
 
   Future<void> logOut() async {
-    await _authService.logout();
     _status.value = AuthStatus.unauthenticated;
+    await _authService.logout();
   }
 
   Future<void> login(String email, String password) async {
@@ -71,7 +97,7 @@ class AuthAPI extends GetxService {
 
   Future<void> register(String email, String password) async {
     try {
-          await _authService.register({'email': email, 'password': password});
+      await _authService.register({'email': email, 'password': password});
     } on DioException catch (e) {
       if (e.response?.statusCode == 400) {
         var errors = RegisterResponseErrorModel.fromJson(e.response?.data);

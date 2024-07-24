@@ -1,9 +1,9 @@
 import 'package:get/get.dart';
+import 'package:mybuddys/app/data/models/event/event.dart';
 
-class EventController extends GetxController {
+class EventController extends GetxController with StateMixin<Event> {
   //TODO: Implement EventController
 
-  final count = 0.obs;
   @override
   void onInit() {
     super.onInit();
@@ -18,6 +18,4 @@ class EventController extends GetxController {
   void onClose() {
     super.onClose();
   }
-
-  void increment() => count.value++;
 }

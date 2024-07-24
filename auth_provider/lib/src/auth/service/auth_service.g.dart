@@ -13,7 +13,7 @@ class _AuthService implements AuthService {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'http://192.168.1.202:8080/api/auth';
+    baseUrl ??= 'http://localhost:8080/api/auth';
   }
 
   final Dio _dio;

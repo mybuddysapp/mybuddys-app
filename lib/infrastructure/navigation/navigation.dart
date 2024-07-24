@@ -29,8 +29,8 @@ class Nav {
   static List<GetPage> routes = [
     GetPage(
       name: Routes.AUTH,
-      page: () => const AuthScreen(),
-      binding: AuthControllerBinding(),
+      page: () => AuthScreen(),
+      // binding: AuthControllerBinding(),
     ),
     GetPage(
       name: Routes.ROOT,
@@ -40,32 +40,32 @@ class Nav {
       children: [
         GetPage(
           name: Routes.HOME,
-          page: () => const HomeScreen(),
-          binding: HomeControllerBinding(),
+          page: () => HomeScreen(),
+          // binding: HomeControllerBinding(),
           // middlewares: [MyMiddleware()],
         ),
         GetPage(
           name: Routes.PROFILE,
-          page: () => const ProfileScreen(),
-          binding: ProfileControllerBinding(),
+          page: () => ProfileScreen(),
+          // binding: ProfileControllerBinding(),
           // middlewares: [MyMiddleware()],
         ),
         GetPage(
           name: Routes.EVENTS,
-          page: () => const EventsScreen(),
+          page: () =>  EventsScreen(),
           binding: EventsControllerBinding(),
           // middlewares: [MyMiddleware()],
         ),
         GetPage(
           name: Routes.EVENT,
-          page: () => const EventScreen(),
+          page: () => EventScreen(),
           binding: EventControllerBinding(),
           // middlewares: [MyMiddleware()],
         ),
         GetPage(
           name: Routes.MESSAGES,
-          page: () => const MessagesScreen(),
-          binding: MessagesControllerBinding(),
+          page: () => MessagesScreen(),
+          // binding: MessagesControllerBinding(),
           // middlewares: [MyMiddleware()],
         ),
         GetPage(
@@ -90,8 +90,8 @@ class Nav {
         ),
         GetPage(
           name: Routes.TEAMS,
-          page: () => const TeamsScreen(),
-          binding: TeamsControllerBinding(),
+          page: () => TeamsScreen(),
+          // binding: TeamsControllerBinding(),
           // middlewares: [MyMiddleware()],
         ),
       ],

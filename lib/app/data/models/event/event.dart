@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:mybuddys/app/data/models/activity/activity.dart';
 import 'package:mybuddys/app/data/models/address/address.dart';
+import 'package:mybuddys/app/data/models/player/player.dart';
 
 
 part 'event.freezed.dart';
@@ -22,7 +23,7 @@ class Event with _$Event {
     required Activity activity,
     required List<String> players,
     String? picture,
-    // Player? creator,
+    required Player creator,
   }) = _Event;
 
   factory Event.fromJson(Map<String, dynamic> json) => _$EventFromJson(json);

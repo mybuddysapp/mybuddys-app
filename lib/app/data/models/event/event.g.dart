@@ -19,6 +19,7 @@ _$EventImpl _$$EventImplFromJson(Map<String, dynamic> json) => _$EventImpl(
       players:
           (json['players'] as List<dynamic>).map((e) => e as String).toList(),
       picture: json['picture'] as String?,
+      creator: Player.fromJson(json['creator'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$EventImplToJson(_$EventImpl instance) =>
@@ -34,4 +35,5 @@ Map<String, dynamic> _$$EventImplToJson(_$EventImpl instance) =>
       'activity': instance.activity,
       'players': instance.players,
       'picture': instance.picture,
+      'creator': instance.creator,
     };

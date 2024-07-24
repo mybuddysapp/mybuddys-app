@@ -68,7 +68,7 @@ class MySliverAppBar extends StatelessWidget {
         title: Text(
           title.split('').join(' '),
           style:  TextStyle(
-            color: Get.textTheme.headline1!.color,
+            color: Get.textTheme.headlineLarge!.color,
             fontSize: 40,
           ),
         ),

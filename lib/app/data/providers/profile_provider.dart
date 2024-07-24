@@ -1,17 +1,19 @@
 import 'package:auth_provider/auth_provider.dart';
 import 'package:dartz/dartz.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mybuddys/app/data/models/player/create_player.dart';
 import 'package:mybuddys/app/data/models/player/player.dart';
 import 'package:mybuddys/config.dart';
+import 'package:mybuddys/infrastructure/utils/const.dart';
 
-import '../../../infrastructure/utils/const.dart';
 
 class ProfileProvider extends GetConnect {
   final String url = ConfigEnvironments.getEnvironments()['url']!;
 
   @override
   void onInit() {
+    super.onInit();
     httpClient.baseUrl = url;
     httpClient.defaultContentType = "application/json";
     // httpClient.defaultDecoder = (map) => Player.fromJson(map);
@@ -56,5 +58,25 @@ class ProfileProvider extends GetConnect {
       {'pseudonym': pseudo},
     );
     return response.statusCode == 200 && response.body['isAvailable'] == "true";
+  }
+
+  Future<Player?> createProfile(CreatePlayer player) async {
+    final response = await post(
+      '${Consts.API_URL}/player/',
+      player.toJson(),
+    );
+    if (response.statusCode == 201) {
+      return Player.fromJson(response.body);
+    } else {
+      throw Exception(response.statusText);
+    }
+  }
+
+  Future<bool> updateProfile(Player player) async {
+    final response = await put(
+      '${Consts.API_URL}/player/${player.id}',
+      player.toJson(),
+    );
+    return response.statusCode == 200;
   }
 }

@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:mybuddys/presentation/screens/profile/controllers/profile.controller.dart';
 
 
 

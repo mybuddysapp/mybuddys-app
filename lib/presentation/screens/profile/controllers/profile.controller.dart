@@ -1,5 +1,4 @@
 import 'package:auth_provider/auth_provider.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:mybuddys/app/data/models/player/player.dart';
 import 'package:mybuddys/app/data/providers/profile_provider.dart';
@@ -9,14 +8,15 @@ import 'package:mybuddys/presentation/screens/profile/controllers/create_profile
 class ProfileController extends GetxController with StateMixin<Player> {
   ProfileProvider profileProvider = ProfileProvider();
 
-  late final Rx<Player> playerProfile;
-
-  final TextEditingController pseudonymController = TextEditingController();
-  var isPseudoAvailable = false.obs;
-
   @override
   void onInit() {
     super.onInit();
+    getPlayerProfile();
+  }
+
+  @override
+  void onReady() {
+    super.onReady();
     getPlayerProfile();
   }
 
@@ -35,22 +35,15 @@ class ProfileController extends GetxController with StateMixin<Player> {
     });
   }
 
-  void handlePseudonymSubmit() async {
-    isPseudoAvailable.value =
-        await profileProvider.checkPseudonym(pseudonymController.text);
-    update();
-  }
-
   void onLogout() {
     Get.find<AuthAPI>().logOut();
-    Get.offAllNamed(Routes.ROOT);
+    Get.deleteAll();
+    Get.toNamed(Routes.ROOT);
   }
 
   void initCreateProfileController() {
-    Get.lazyPut<CreateProfileController>(() => CreateProfileController(
-          pseudonym: pseudonymController.text,
-        ));
+    Get.lazyPut<CreateProfileController>(
+      () => CreateProfileController(),
+    );
   }
-
-  void handlePseudoConfirm() {}
 }

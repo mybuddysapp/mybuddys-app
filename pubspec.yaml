@@ -18,28 +18,26 @@ dependencies:
   riverpod_annotation: ^2.3.5
   freezed_annotation: ^2.4.1
   json_annotation: ^4.9.0
-  json_serializable: ^6.7.1
+  json_serializable: ^6.8.0
   salomon_bottom_bar: ^3.3.2
   persistent_bottom_nav_bar: ^5.0.2
   flutter_chat_ui: ^1.6.12
   async: ^2.11.0
   dio: ^5.4.3+1
-  intl: ^0.18.1
+  intl: ^0.19.0
   wolt_modal_sheet: ^0.5.0
   audioplayers: ^6.0.0
   cached_network_image: ^3.3.1
   custom_refresh_indicator: ^3.1.0
-  geolocator: ^11.0.0
+  geolocator: ^11.1.0
   riverpod_test: ^0.1.4
   google_fonts: ^6.2.1
-  flutter_form_builder: ^9.2.1
-  form_builder_validators: ^9.1.0
   url_launcher: ^6.2.6
   sliver_app_bar_builder: ^1.1.0
   babstrap_settings_screen: ^0.1.6
   icons_plus: ^5.0.0
   modal_bottom_sheet: ^3.0.0
-  get_cli: ^1.8.1
+#  get_cli: ^1.8.4
   get: 4.6.6
   flutter:
     sdk: flutter
@@ -47,19 +45,33 @@ dependencies:
     path: auth_provider
   flutter_dotenv: ^5.1.0
   lo_form: ^0.5.0
-  reactive_forms: ^16.1.1
+  reactive_forms: ^17.0.1
   retrofit: ^4.1.0
-  logger: ^2.2.0
+  logger: ^2.3.0
   retrofit_generator: ^8.1.0
   shared_preferences: ^2.2.3
   dartz: ^0.10.1
+#  form_builder_cupertino_fields: any
+  image_picker: ^1.1.1
+  phone_input: ^1.0.0
+  flutter_map: ^6.1.0
+  latlong2: ^0.9.1
+  flutter_map_cancellable_tile_provider: ^2.0.0
+  flutter_map_location_marker: ^8.0.8
+  csc_picker: ^0.2.7
+  country_state_city: ^0.1.6
+  flutter_typeahead: ^5.2.0
+  intl_phone_number_input: ^0.7.4
 
+analyzer:
+  enable-experiment:
+    - macros
 
 dev_dependencies:
   flutter_launcher_icons: ^0.13.1
-  flutter_lints: ^3.0.2
+  flutter_lints: ^4.0.0
   riverpod_generator: ^2.4.0
-  build_runner: ^2.4.9
+  build_runner: ^2.4.10
   custom_lint: ^0.6.4
   riverpod_lint: ^2.3.10
   freezed: ^2.5.2

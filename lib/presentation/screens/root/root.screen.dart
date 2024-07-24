@@ -10,7 +10,6 @@ class RootScreen extends GetView<RootController> {
 
   @override
   Widget build(BuildContext context) {
-    controller.getPlayers();
     return Obx(() => controller.status == AuthStatus.uninitialized
         ? const Scaffold(
             body: Center(
@@ -20,7 +19,7 @@ class RootScreen extends GetView<RootController> {
             ),
           )
         : controller.status == AuthStatus.authenticated
-            ? const HomeScreen()
-            : const AuthScreen());
+            ?  HomeScreen()
+            :  AuthScreen());
   }
 }

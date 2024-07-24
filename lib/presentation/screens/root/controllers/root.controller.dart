@@ -19,9 +19,6 @@ class RootController extends GetxController {
   @override
   void onReady() {
     super.onReady();
-    // ApiService apiService = ApiService(Dio());
-    // final logger = Logger();
-    // apiService.getPlayers().then((value) => logger.d(value));
   }
 
   @override
@@ -29,10 +26,4 @@ class RootController extends GetxController {
     super.onClose();
   }
 
-  Future<void> getPlayers() async {
-
-    final logger = Logger();
-    print("getPlayers");
-
-  }
 }

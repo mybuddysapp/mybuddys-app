@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 
 class MyButton extends StatelessWidget {
   final String text;
   final Function() onTap;
   final bool isDisabled;
+  final Color? color;
 
   const MyButton(
       {super.key,
       required this.text,
       required this.onTap,
+      this.color,
       this.isDisabled = false});
 
   @override
@@ -18,17 +19,20 @@ class MyButton extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        MaterialButton(
-          onPressed: isDisabled ? null : onTap,
-          color: isDisabled ? Colors.grey : Colors.blue,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
-          height: 42,
-          minWidth: MediaQuery.of(context).size.width * 0.8,
-          child: Text(
-            text,
-            style: Get.textTheme.button
+        Expanded(
+          //take the width of the parent widget
+
+          child: MaterialButton(
+            onPressed: isDisabled ? null : onTap,
+            color: isDisabled ? Colors.grey : color ?? Get.theme.primaryColor,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+            height: 42,
+            textTheme: ButtonTextTheme.primary,
+
+            // minWidth: MediaQuery.of(context).size.width*0.9,
+            child: Text(text),
           ),
         ),
       ],

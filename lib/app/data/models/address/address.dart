@@ -8,11 +8,11 @@ part 'address.freezed.dart';
 class Address with _$Address {
   factory Address({
     required String id,
-    required String number,
-    required String street,
+    // required String number,
+    // required String street,
     required String city,
-    String? state,
-    required String zip,
+    // String? state,
+    // required String zip,
     required String country,
   }) = _Address;
 

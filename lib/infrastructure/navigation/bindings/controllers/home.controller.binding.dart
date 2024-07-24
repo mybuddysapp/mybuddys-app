@@ -7,12 +7,12 @@ import 'package:mybuddys/presentation/screens/profile/controllers/profile.contro
 class HomeControllerBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<HomeController>(
-      () => HomeController(),
-    );
     // Get.lazyPut<ProfileController>(
     //   () => ProfileController(),
     //   // fenix: true,
+    // );
+    // Get.lazyPut<HomeController>(
+    //   () => HomeController(),
     // );
   }
 }
